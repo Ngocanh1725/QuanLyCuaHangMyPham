@@ -8,13 +8,4 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace QuanLyCuaHangMyPham
-{
-    public partial class frmSanPham : Form
-    {
-        public frmSanPham()
-        {
-            InitializeComponent();
-        }
-    }
-}
+namespace QuanLyCuaHangMyPham { public class FormThongKe : Form { public FormThongKe() { this.Text = "THỐNG KÊ DOANH THU"; } } }

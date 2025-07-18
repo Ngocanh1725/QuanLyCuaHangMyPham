@@ -8,4 +8,4 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace QuanLyCuaHangMyPham { public class FormDonHang : Form { public FormDonHang() { this.Text = "TẠO ĐƠN HÀNG"; } } }
+namespace QuanLyCuaHangMyPham { public partial class FormDonHang : Form { public FormDonHang() { this.Text = "TẠO ĐƠN HÀNG"; } } }

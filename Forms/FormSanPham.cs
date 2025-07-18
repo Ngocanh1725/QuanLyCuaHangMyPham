@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace QuanLyCuaHangMyPham 
     { 
-        public class FormSanPham : Form 
+        public partial class FormSanPham : Form 
         { 
             public FormSanPham() 
                 { this.Text = "QUẢN LÝ SẢN PHẨM";  

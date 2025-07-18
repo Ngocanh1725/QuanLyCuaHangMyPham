@@ -1,4 +1,4 @@
-﻿namespace QuanLyCuaHangMyPham.Forms
+﻿namespace QuanLyCuaHangMyPham
 {
     partial class FormDonHang
     {

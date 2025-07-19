@@ -27,15 +27,12 @@ namespace QuanLyCuaHangMyPham
             {
                 TaiKhoanDTO loginAccount = TaiKhoanBLL.Instance.GetAccountByUserName(userName);
 
-                // Giả sử bạn có một FormMain để mở sau khi đăng nhập thành công
-                // FormMain f = new FormMain(loginAccount);
-                // this.Hide();
-                // f.ShowDialog();
-                // this.Show(); // Hiển thị lại form login sau khi form main đóng
-
                 MessageBox.Show($"Đăng nhập thành công với quyền {loginAccount.PhanQuyen}!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 // Tạm thời đóng form vì chưa có FormMain
-                this.Close();
+                FormMainMenu f = new FormMainMenu(loginAccount);
+                this.Hide();
+                f.ShowDialog();
+                this.Show(); // Hiển thị lại form login sau khi form main đóng
             }
             else
             {

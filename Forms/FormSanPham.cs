@@ -1,5 +1,4 @@
-﻿
-using QuanLyCuaHangMyPham.BLL;
+﻿using QuanLyCuaHangMyPham.BLL;
 using QuanLyCuaHangMyPham.DTO;
 using System;
 using System.Windows.Forms;
@@ -22,7 +21,18 @@ namespace QuanLyCuaHangMyPham
 
         void LoadSanPhamList()
         {
+            // Xóa binding cũ để tránh lỗi
+            txtMaSP.DataBindings.Clear();
+            txtTenSP.DataBindings.Clear();
+            txtHangSP.DataBindings.Clear();
+            txtXuatXu.DataBindings.Clear();
+            txtTheLoai.DataBindings.Clear();
+            cbbNhaCungCap.DataBindings.Clear();
+
             dgvSanPham.DataSource = SanPhamBLL.Instance.GetListSanPham();
+
+            // Add lại binding sau khi load data
+            AddSanPhamBinding();
         }
 
         void LoadNhaCungCapComboBox()
@@ -34,12 +44,32 @@ namespace QuanLyCuaHangMyPham
 
         void AddSanPhamBinding()
         {
+            RemoveExistingBinding(txtMaSP, "Text");
             txtMaSP.DataBindings.Add(new Binding("Text", dgvSanPham.DataSource, "MaSP", true, DataSourceUpdateMode.Never));
+
+            RemoveExistingBinding(txtTenSP, "Text");
             txtTenSP.DataBindings.Add(new Binding("Text", dgvSanPham.DataSource, "TenSP", true, DataSourceUpdateMode.Never));
+            
+            RemoveExistingBinding(txtHangSP, "Text");
             txtHangSP.DataBindings.Add(new Binding("Text", dgvSanPham.DataSource, "HangSP", true, DataSourceUpdateMode.Never));
+            
+            RemoveExistingBinding(txtXuatXu, "Text");
             txtXuatXu.DataBindings.Add(new Binding("Text", dgvSanPham.DataSource, "XuatXu", true, DataSourceUpdateMode.Never));
+            
+            RemoveExistingBinding(txtTheLoai, "Text");
             txtTheLoai.DataBindings.Add(new Binding("Text", dgvSanPham.DataSource, "TheLoai", true, DataSourceUpdateMode.Never));
+            
+            RemoveExistingBinding(cbbNhaCungCap, "SelectedValue");
             cbbNhaCungCap.DataBindings.Add(new Binding("SelectedValue", dgvSanPham.DataSource, "MaNCC", true, DataSourceUpdateMode.Never));
+        }
+
+        void RemoveExistingBinding(Control control, string propertyName)
+        {
+            var binding = control.DataBindings[propertyName];
+            if (binding != null)
+            {
+                control.DataBindings.Remove(binding);
+            }
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -135,7 +165,13 @@ namespace QuanLyCuaHangMyPham
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            LoadSanPhamList();
+            txtMaSP.Clear();
+            txtTenSP.Clear();
+            txtHangSP.Clear();
+            txtXuatXu.Clear();
+            txtTheLoai.Clear();
             txtTimKiem.Clear();
+            LoadSanPhamList();
         }
     }
+}

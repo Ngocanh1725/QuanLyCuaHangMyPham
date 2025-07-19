@@ -8,11 +8,13 @@ namespace QuanLyCuaHangMyPham.DAL
     public class DataProvider
     {
         // !!! QUAN TRỌNG: Thay đổi chuỗi kết nối này để phù hợp với SQL Server của bạn.
-        // Data Source: Tên Server SQL của bạn (có thể tìm trong SSMS).
-        // Initial Catalog: Tên cơ sở dữ liệu bạn đã tạo (QuanLyCuaHangMyPham).
-        // Integrated Security=True: Sử dụng xác thực Windows.
-        // Nếu dùng xác thực SQL Server, chuỗi sẽ là: "Data Source=TEN_SERVER;Initial Catalog=QuanLyCuaHangMyPham;User ID=sa;Password=MATKHAUCUABAN"
-        private static string connectionString = @"Data Source=ADMIN-PC.;Initial Catalog=QuanLyCuaHangMyPham;Integrated Security=True";
+        private static string connectionString = @"Data Source=ADMIN-PC;Initial Catalog=QuanLyCuaHangMyPham;User ID=sa;Password=12345678";
+
+        // Thuộc tính công khai để truy cập chuỗi kết nối từ bên ngoài
+        public string ConnectionString
+        {
+            get { return connectionString; }
+        }
 
         private static DataProvider instance;
 
@@ -24,12 +26,6 @@ namespace QuanLyCuaHangMyPham.DAL
 
         private DataProvider() { }
 
-        /// <summary>
-        /// Thực thi câu lệnh query và trả về một DataTable.
-        /// </summary>
-        /// <param name="query">Câu lệnh SQL.</param>
-        /// <param name="parameters">Các tham số cho câu lệnh SQL.</param>
-        /// <returns>DataTable chứa kết quả.</returns>
         public DataTable ExecuteQuery(string query, object[] parameters = null)
         {
             DataTable data = new DataTable();
@@ -46,7 +42,7 @@ namespace QuanLyCuaHangMyPham.DAL
                     {
                         if (item.Contains('@'))
                         {
-                            command.Parameters.AddWithValue(item, parameters[i]);
+                            command.Parameters.AddWithValue(item.Trim(), parameters[i]);
                             i++;
                         }
                     }
@@ -59,12 +55,6 @@ namespace QuanLyCuaHangMyPham.DAL
             return data;
         }
 
-        /// <summary>
-        /// Thực thi câu lệnh không trả về kết quả (INSERT, UPDATE, DELETE).
-        /// </summary>
-        /// <param name="query">Câu lệnh SQL.</param>
-        /// <param name="parameters">Các tham số cho câu lệnh SQL.</param>
-        /// <returns>Số dòng bị ảnh hưởng.</returns>
         public int ExecuteNonQuery(string query, object[] parameters = null)
         {
             int data = 0;
@@ -81,7 +71,7 @@ namespace QuanLyCuaHangMyPham.DAL
                     {
                         if (item.Contains('@'))
                         {
-                            command.Parameters.AddWithValue(item, parameters[i]);
+                            command.Parameters.AddWithValue(item.Trim(), parameters[i]);
                             i++;
                         }
                     }
@@ -93,12 +83,6 @@ namespace QuanLyCuaHangMyPham.DAL
             return data;
         }
 
-        /// <summary>
-        /// Thực thi câu lệnh và trả về giá trị của cột đầu tiên, dòng đầu tiên.
-        /// </summary>
-        /// <param name="query">Câu lệnh SQL.</param>
-        /// <param name="parameters">Các tham số cho câu lệnh SQL.</param>
-        /// <returns>Đối tượng chứa kết quả.</returns>
         public object ExecuteScalar(string query, object[] parameters = null)
         {
             object data = 0;
@@ -115,7 +99,7 @@ namespace QuanLyCuaHangMyPham.DAL
                     {
                         if (item.Contains('@'))
                         {
-                            command.Parameters.AddWithValue(item, parameters[i]);
+                            command.Parameters.AddWithValue(item.Trim(), parameters[i]);
                             i++;
                         }
                     }

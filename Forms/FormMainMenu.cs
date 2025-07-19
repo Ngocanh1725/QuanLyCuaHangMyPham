@@ -78,27 +78,27 @@ namespace QuanLyCuaHangMyPham
 
         private void btnNhaCungCap_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Chức năng 'Nhà cung cấp' sẽ được phát triển ở bước tiếp theo.", "Thông báo");
+            OpenChildForm(new FormNhaCungCap(), sender);
         }
 
         private void btnDonHang_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Chức năng 'Tạo đơn hàng' sẽ được phát triển ở bước tiếp theo.", "Thông báo");
+            OpenChildForm(new FormDonHang(loginAccount), sender);
         }
 
         private void btnKhoHang_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Chức năng 'Kho hàng' sẽ được phát triển ở bước tiếp theo.", "Thông báo");
+            OpenChildForm(new FormKhoHang(), sender);
         }
 
         private void btnNhanVien_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Chức năng 'Nhân viên' sẽ được phát triển ở bước tiếp theo.", "Thông báo");
+            OpenChildForm(new FormNhanVien(), sender);
         }
 
         private void btnThongKe_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Chức năng 'Thống kê' sẽ được phát triển ở bước tiếp theo.", "Thông báo");
+            OpenChildForm(new FormThongKe(), sender);
         }
 
         private void btnDangXuat_Click(object sender, EventArgs e)

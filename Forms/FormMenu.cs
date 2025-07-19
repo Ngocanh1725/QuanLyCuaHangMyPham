@@ -68,7 +68,7 @@ namespace QuanLyCuaHangMyPham
             childForm.Show();
             lblTitle.Text = childForm.Text;
         }
-
+        
         // Sự kiện load form
         private void FormMenu_Load(object sender, EventArgs e)
         {

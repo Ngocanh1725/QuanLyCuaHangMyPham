@@ -17,10 +17,30 @@ namespace QuanLyCuaHangMyPham
 
         private void FormThongKe_Load(object sender, EventArgs e)
         {
+            SetupDataGridView();
             // Mặc định thống kê trong tháng hiện tại
             dtpFromDate.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             dtpToDate.Value = DateTime.Now;
             btnThongKe.PerformClick();
+        }
+
+        void SetupDataGridView()
+        {
+            dgvDonHang.AutoGenerateColumns = false;
+            dgvDonHang.Columns.Clear();
+
+            dgvDonHang.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "MaDH", HeaderText = "Mã Đơn Hàng" });
+            dgvDonHang.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "TenKH", HeaderText = "Tên Khách Hàng" });
+            dgvDonHang.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "NgayMua", HeaderText = "Ngày Mua" });
+            dgvDonHang.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "TenNV", HeaderText = "Nhân Viên" });
+
+            var tongTienColumn = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "TongTien",
+                HeaderText = "Tổng Tiền (VNĐ)"
+            };
+            tongTienColumn.DefaultCellStyle.Format = "N0"; // Định dạng số
+            dgvDonHang.Columns.Add(tongTienColumn);
         }
 
         private void btnThongKe_Click(object sender, EventArgs e)

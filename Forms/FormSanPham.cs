@@ -3,6 +3,9 @@ using QuanLyCuaHangMyPham.DTO;
 using System;
 using System.Windows.Forms;
 
+// Thêm using cho custom control
+using QuanLyCuaHangMyPham.CustomControls;
+
 namespace QuanLyCuaHangMyPham
 {
     public partial class FormSanPham : Form
@@ -14,9 +17,23 @@ namespace QuanLyCuaHangMyPham
 
         private void FormSanPham_Load(object sender, EventArgs e)
         {
+            SetupDataGridView();
             LoadSanPhamList();
             LoadNhaCungCapComboBox();
-            AddSanPhamBinding();
+        }
+
+        void SetupDataGridView()
+        {
+            // Cấu hình các cột cho DataGridView
+            dgvSanPham.AutoGenerateColumns = false; // Tắt tự động tạo cột
+            dgvSanPham.Columns.Clear();
+
+            dgvSanPham.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "MaSP", HeaderText = "Mã SP" });
+            dgvSanPham.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "TenSP", HeaderText = "Tên Sản Phẩm" });
+            dgvSanPham.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "HangSP", HeaderText = "Hãng" });
+            dgvSanPham.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "XuatXu", HeaderText = "Xuất Xứ" });
+            dgvSanPham.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "TheLoai", HeaderText = "Thể Loại" });
+            dgvSanPham.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "MaNCC", HeaderText = "Mã NCC" });
         }
 
         void LoadSanPhamList()
@@ -44,52 +61,25 @@ namespace QuanLyCuaHangMyPham
 
         void AddSanPhamBinding()
         {
-            RemoveExistingBinding(txtMaSP, "Text");
             txtMaSP.DataBindings.Add(new Binding("Text", dgvSanPham.DataSource, "MaSP", true, DataSourceUpdateMode.Never));
-
-            RemoveExistingBinding(txtTenSP, "Text");
             txtTenSP.DataBindings.Add(new Binding("Text", dgvSanPham.DataSource, "TenSP", true, DataSourceUpdateMode.Never));
-            
-            RemoveExistingBinding(txtHangSP, "Text");
             txtHangSP.DataBindings.Add(new Binding("Text", dgvSanPham.DataSource, "HangSP", true, DataSourceUpdateMode.Never));
-            
-            RemoveExistingBinding(txtXuatXu, "Text");
             txtXuatXu.DataBindings.Add(new Binding("Text", dgvSanPham.DataSource, "XuatXu", true, DataSourceUpdateMode.Never));
-            
-            RemoveExistingBinding(txtTheLoai, "Text");
             txtTheLoai.DataBindings.Add(new Binding("Text", dgvSanPham.DataSource, "TheLoai", true, DataSourceUpdateMode.Never));
-            
-            RemoveExistingBinding(cbbNhaCungCap, "SelectedValue");
             cbbNhaCungCap.DataBindings.Add(new Binding("SelectedValue", dgvSanPham.DataSource, "MaNCC", true, DataSourceUpdateMode.Never));
-        }
-
-        void RemoveExistingBinding(Control control, string propertyName)
-        {
-            var binding = control.DataBindings[propertyName];
-            if (binding != null)
-            {
-                control.DataBindings.Remove(binding);
-            }
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
             try
             {
-                string maSP = txtMaSP.Text;
-                string tenSP = txtTenSP.Text;
-                string hangSP = txtHangSP.Text;
-                string xuatXu = txtXuatXu.Text;
-                string theLoai = txtTheLoai.Text;
-                string maNCC = cbbNhaCungCap.SelectedValue.ToString();
-
-                if (string.IsNullOrWhiteSpace(maSP) || string.IsNullOrWhiteSpace(tenSP))
+                if (string.IsNullOrWhiteSpace(txtMaSP.Text) || string.IsNullOrWhiteSpace(txtTenSP.Text))
                 {
                     MessageBox.Show("Mã và Tên sản phẩm không được để trống!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                if (SanPhamBLL.Instance.InsertSanPham(maSP, tenSP, hangSP, xuatXu, theLoai, maNCC))
+                if (SanPhamBLL.Instance.InsertSanPham(txtMaSP.Text, txtTenSP.Text, txtHangSP.Text, txtXuatXu.Text, txtTheLoai.Text, cbbNhaCungCap.SelectedValue.ToString()))
                 {
                     MessageBox.Show("Thêm sản phẩm thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadSanPhamList();
@@ -109,14 +99,7 @@ namespace QuanLyCuaHangMyPham
         {
             try
             {
-                string maSP = txtMaSP.Text;
-                string tenSP = txtTenSP.Text;
-                string hangSP = txtHangSP.Text;
-                string xuatXu = txtXuatXu.Text;
-                string theLoai = txtTheLoai.Text;
-                string maNCC = cbbNhaCungCap.SelectedValue.ToString();
-
-                if (SanPhamBLL.Instance.UpdateSanPham(maSP, tenSP, hangSP, xuatXu, theLoai, maNCC))
+                if (SanPhamBLL.Instance.UpdateSanPham(txtMaSP.Text, txtTenSP.Text, txtHangSP.Text, txtXuatXu.Text, txtTheLoai.Text, cbbNhaCungCap.SelectedValue.ToString()))
                 {
                     MessageBox.Show("Cập nhật sản phẩm thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadSanPhamList();
@@ -136,11 +119,9 @@ namespace QuanLyCuaHangMyPham
         {
             try
             {
-                string maSP = txtMaSP.Text;
-
-                if (MessageBox.Show($"Bạn có chắc chắn muốn xóa sản phẩm '{maSP}' không? Hành động này không thể hoàn tác.", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show($"Bạn có chắc chắn muốn xóa sản phẩm '{txtTenSP.Text}' không? Hành động này không thể hoàn tác.", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    if (SanPhamBLL.Instance.DeleteSanPham(maSP))
+                    if (SanPhamBLL.Instance.DeleteSanPham(txtMaSP.Text))
                     {
                         MessageBox.Show("Xóa sản phẩm thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadSanPhamList();
@@ -159,8 +140,7 @@ namespace QuanLyCuaHangMyPham
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            string keyword = txtTimKiem.Text;
-            dgvSanPham.DataSource = SanPhamBLL.Instance.SearchSanPham(keyword);
+            dgvSanPham.DataSource = SanPhamBLL.Instance.SearchSanPham(txtTimKiem.Text);
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -172,6 +152,7 @@ namespace QuanLyCuaHangMyPham
             txtTheLoai.Clear();
             txtTimKiem.Clear();
             LoadSanPhamList();
+            txtMaSP.Focus();
         }
     }
 }

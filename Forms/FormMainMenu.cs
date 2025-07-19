@@ -17,11 +17,19 @@ namespace QuanLyCuaHangMyPham
         {
             InitializeComponent();
             this.loginAccount = acc;
-            // Phân quyền sẽ được xử lý ở đây nếu cần
-            // PhanQuyen(); 
+            PhanQuyen();
         }
 
         // Methods
+        void PhanQuyen()
+        {
+            if (loginAccount.PhanQuyen.Equals("Nhân viên", StringComparison.OrdinalIgnoreCase))
+            {
+                btnNhanVien.Visible = false;
+                btnThongKe.Visible = false;
+            }
+        }
+
         private void ActivateButton(object btnSender)
         {
             if (btnSender != null)
@@ -29,12 +37,11 @@ namespace QuanLyCuaHangMyPham
                 if (currentButton != (Button)btnSender)
                 {
                     DisableButton();
-                    Color color = Color.White; // Màu khi button được chọn
+                    Color color = Color.White;
                     currentButton = (Button)btnSender;
                     currentButton.BackColor = color;
                     currentButton.ForeColor = Color.DeepPink;
                     currentButton.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                    // Thay đổi Title
                     lblTitle.Text = currentButton.Text.Trim().ToUpper();
                 }
             }
@@ -46,7 +53,7 @@ namespace QuanLyCuaHangMyPham
             {
                 if (previousBtn.GetType() == typeof(Button))
                 {
-                    previousBtn.BackColor = Color.FromArgb(255, 192, 203); // Màu nền mặc định của menu
+                    previousBtn.BackColor = Color.FromArgb(255, 192, 203);
                     previousBtn.ForeColor = Color.FromArgb(64, 64, 64);
                     previousBtn.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 }
@@ -103,12 +110,15 @@ namespace QuanLyCuaHangMyPham
 
         private void btnDangXuat_Click(object sender, EventArgs e)
         {
-            this.Close(); // Sẽ kích hoạt FormClosing event của FormLogin để hiển thị lại
+            this.Close();
         }
 
+        // Sửa lỗi: Thêm phương thức xử lý sự kiện FormClosed còn thiếu
         private void FormMainMenu_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // Khi FormMainMenu đóng, FormLogin sẽ được hiển thị lại
+            // Khi form này đóng (đăng xuất), FormLogin sẽ tự động hiển thị lại
+            // do cách gọi f.ShowDialog() trong FormLogin.
+            // Không cần thêm code vào đây.
         }
     }
 }

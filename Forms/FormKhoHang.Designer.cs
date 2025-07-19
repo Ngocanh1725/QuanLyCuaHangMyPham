@@ -17,9 +17,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelTop = new System.Windows.Forms.Panel();
-            this.btnLamMoi = new System.Windows.Forms.Button();
-            this.btnXoa = new System.Windows.Forms.Button();
-            this.btnNhapHang = new System.Windows.Forms.Button();
+            this.btnLamMoi = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
+            this.btnXoa = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
+            this.btnNhapHang = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
             this.dgvKhoHang = new System.Windows.Forms.DataGridView();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKhoHang)).BeginInit();
@@ -139,9 +139,9 @@
         #endregion
 
         private System.Windows.Forms.Panel panelTop;
-        private System.Windows.Forms.Button btnNhapHang;
+        private CustomControls.RoundedButton btnLamMoi;
+        private CustomControls.RoundedButton btnXoa;
+        private CustomControls.RoundedButton btnNhapHang;
         private System.Windows.Forms.DataGridView dgvKhoHang;
-        private System.Windows.Forms.Button btnLamMoi;
-        private System.Windows.Forms.Button btnXoa;
     }
 }

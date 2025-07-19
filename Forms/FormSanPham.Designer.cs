@@ -34,13 +34,13 @@
         this.label3 = new System.Windows.Forms.Label();
         this.label2 = new System.Windows.Forms.Label();
         this.label1 = new System.Windows.Forms.Label();
+        this.btnReset = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
+        this.btnXoa = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
+        this.btnSua = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
+        this.btnThem = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
+        this.btnTimKiem = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
         this.panelActions = new System.Windows.Forms.Panel();
-        this.btnReset = new System.Windows.Forms.Button();
-        this.btnXoa = new System.Windows.Forms.Button();
-        this.btnSua = new System.Windows.Forms.Button();
-        this.btnThem = new System.Windows.Forms.Button();
         this.panelSearch = new System.Windows.Forms.Panel();
-        this.btnTimKiem = new System.Windows.Forms.Button();
         this.txtTimKiem = new System.Windows.Forms.TextBox();
         ((System.ComponentModel.ISupportInitialize)(this.dgvSanPham)).BeginInit();
         this.panelTop.SuspendLayout();
@@ -384,12 +384,12 @@
     private System.Windows.Forms.TextBox txtHangSP;
     private System.Windows.Forms.TextBox txtTenSP;
     private System.Windows.Forms.Panel panelActions;
-    private System.Windows.Forms.Button btnThem;
-    private System.Windows.Forms.Button btnReset;
-    private System.Windows.Forms.Button btnXoa;
-    private System.Windows.Forms.Button btnSua;
+    private CustomControls.RoundedButton btnThem;
+    private CustomControls.RoundedButton btnReset;
+    private CustomControls.RoundedButton btnXoa;
+    private CustomControls.RoundedButton btnSua;
+    private CustomControls.RoundedButton btnTimKiem;
     private System.Windows.Forms.Panel panelSearch;
-    private System.Windows.Forms.Button btnTimKiem;
     private System.Windows.Forms.TextBox txtTimKiem;
 }
 }

@@ -2,15 +2,14 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Windows.Forms; // For MessageBox
 
 namespace QuanLyCuaHangMyPham.DAL
 {
     public class DataProvider
     {
-        // !!! QUAN TRỌNG: Thay đổi chuỗi kết nối này để phù hợp với SQL Server của bạn.
-        private static string connectionString = @"Data Source=ADMIN-PC;Initial Catalog=QuanLyCuaHangMyPham;User ID=sa;Password=12345678";
+        private static string connectionString = @"Data Source=.;Initial Catalog=QuanLyCuaHangMyPham;Integrated Security=True";
 
-        // Thuộc tính công khai để truy cập chuỗi kết nối từ bên ngoài
         public string ConnectionString
         {
             get { return connectionString; }
@@ -26,89 +25,126 @@ namespace QuanLyCuaHangMyPham.DAL
 
         private DataProvider() { }
 
-        public DataTable ExecuteQuery(string query, object[] parameters = null)
+        // Tối ưu: Thêm try-catch để xử lý lỗi kết nối tập trung
+        private DataTable ExecuteQueryInternal(string query, object[] parameters = null)
         {
             DataTable data = new DataTable();
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            try
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-
-                if (parameters != null)
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string[] listPara = query.Split(' ');
-                    int i = 0;
-                    foreach (string item in listPara)
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(query, connection);
+
+                    if (parameters != null)
                     {
-                        if (item.Contains('@'))
+                        string[] listPara = query.Split(' ');
+                        int i = 0;
+                        foreach (string item in listPara)
                         {
-                            command.Parameters.AddWithValue(item.Trim(), parameters[i]);
-                            i++;
+                            if (item.Contains('@'))
+                            {
+                                command.Parameters.AddWithValue(item, parameters[i]);
+                                i++;
+                            }
                         }
                     }
-                }
 
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
-                adapter.Fill(data);
-                connection.Close();
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    adapter.Fill(data);
+                    connection.Close();
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Lỗi cơ sở dữ liệu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return data;
+        }
+
+        public DataTable ExecuteQuery(string query, object[] parameters = null)
+        {
+            return ExecuteQueryInternal(query, parameters);
+        }
+
+        // Tối ưu: Thêm try-catch để xử lý lỗi thực thi tập trung
+        private int ExecuteNonQueryInternal(string query, object[] parameters = null)
+        {
+            int data = 0;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(query, connection);
+
+                    if (parameters != null)
+                    {
+                        string[] listPara = query.Split(' ');
+                        int i = 0;
+                        foreach (string item in listPara)
+                        {
+                            if (item.Contains('@'))
+                            {
+                                command.Parameters.AddWithValue(item, parameters[i]);
+                                i++;
+                            }
+                        }
+                    }
+
+                    data = command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Ném lại ngoại lệ để tầng BLL có thể bắt và xử lý lỗi nghiệp vụ
+                // Ví dụ: Lỗi trùng khóa chính
+                throw ex;
             }
             return data;
         }
 
         public int ExecuteNonQuery(string query, object[] parameters = null)
         {
-            int data = 0;
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-
-                if (parameters != null)
-                {
-                    string[] listPara = query.Split(' ');
-                    int i = 0;
-                    foreach (string item in listPara)
-                    {
-                        if (item.Contains('@'))
-                        {
-                            command.Parameters.AddWithValue(item.Trim(), parameters[i]);
-                            i++;
-                        }
-                    }
-                }
-
-                data = command.ExecuteNonQuery();
-                connection.Close();
-            }
-            return data;
+            return ExecuteNonQueryInternal(query, parameters);
         }
 
+        // Tối ưu: Thêm try-catch
         public object ExecuteScalar(string query, object[] parameters = null)
         {
-            object data = 0;
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            object data = null;
+            try
             {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-
-                if (parameters != null)
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string[] listPara = query.Split(' ');
-                    int i = 0;
-                    foreach (string item in listPara)
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(query, connection);
+
+                    if (parameters != null)
                     {
-                        if (item.Contains('@'))
+                        string[] listPara = query.Split(' ');
+                        int i = 0;
+                        foreach (string item in listPara)
                         {
-                            command.Parameters.AddWithValue(item.Trim(), parameters[i]);
-                            i++;
+                            if (item.Contains('@'))
+                            {
+                                command.Parameters.AddWithValue(item, parameters[i]);
+                                i++;
+                            }
                         }
                     }
-                }
 
-                data = command.ExecuteScalar();
-                connection.Close();
+                    data = command.ExecuteScalar();
+                    connection.Close();
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Lỗi cơ sở dữ liệu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return data;
         }
     }
 }
+    

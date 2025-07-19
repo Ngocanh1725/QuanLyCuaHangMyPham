@@ -13,8 +13,23 @@ namespace QuanLyCuaHangMyPham
 
         private void FormNhanVien_Load(object sender, EventArgs e)
         {
+            SetupDataGridView();
             LoadNhanVienList();
             AddNhanVienBinding();
+        }
+
+        void SetupDataGridView()
+        {
+            dgvNhanVien.AutoGenerateColumns = false;
+            dgvNhanVien.Columns.Clear();
+
+            dgvNhanVien.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "MaNV", HeaderText = "Mã NV" });
+            dgvNhanVien.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "TenNV", HeaderText = "Họ và Tên" });
+            dgvNhanVien.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "SDT", HeaderText = "Số Điện Thoại" });
+            dgvNhanVien.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "QueQuan", HeaderText = "Quê Quán" });
+            dgvNhanVien.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Email", HeaderText = "Email" });
+            dgvNhanVien.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "TenTK", HeaderText = "Tên Tài Khoản" });
+            dgvNhanVien.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "MatKhau", HeaderText = "Mật Khẩu" });
         }
 
         void LoadNhanVienList()

@@ -19,7 +19,7 @@ partial class FormThongKe
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
         this.panelTop = new System.Windows.Forms.Panel();
-        this.btnThongKe = new System.Windows.Forms.Button();
+        this.btnThongKe = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
         this.dtpToDate = new System.Windows.Forms.DateTimePicker();
         this.label2 = new System.Windows.Forms.Label();
         this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
@@ -275,7 +275,7 @@ partial class FormThongKe
     }
     #endregion
     private System.Windows.Forms.Panel panelTop;
-    private System.Windows.Forms.Button btnThongKe;
+    private CustomControls.RoundedButton btnThongKe;
     private System.Windows.Forms.DateTimePicker dtpToDate;
     private System.Windows.Forms.Label label2;
     private System.Windows.Forms.DateTimePicker dtpFromDate;

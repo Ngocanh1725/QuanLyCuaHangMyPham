@@ -54,6 +54,9 @@
     <Compile Include="BLL\SanPhamBLL.cs" />
     <Compile Include="BLL\TaiKhoanBLL.cs" />
     <Compile Include="BLL\ThongKeBLL.cs" />
+    <Compile Include="CustomControls\RoundedButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DAL\ChiTietDonHangDAL.cs" />
     <Compile Include="DAL\DataProvider.cs" />
     <Compile Include="DAL\DonHangDAL.cs" />
@@ -127,6 +130,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\FormMainMenu.resx">
+      <DependentUpon>FormMainMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormNhaCungCap.resx">
       <DependentUpon>FormNhaCungCap.cs</DependentUpon>
     </EmbeddedResource>

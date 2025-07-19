@@ -33,8 +33,8 @@
         this.panelRight = new System.Windows.Forms.Panel();
         this.dgvGioHang = new System.Windows.Forms.DataGridView();
         this.gbThemSanPham = new System.Windows.Forms.GroupBox();
-        this.btnXoaSP = new System.Windows.Forms.Button();
-        this.btnThemSP = new System.Windows.Forms.Button();
+        this.btnXoaSP = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
+        this.btnThemSP = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
         this.txtGiaBan = new System.Windows.Forms.TextBox();
         this.label8 = new System.Windows.Forms.Label();
         this.numSoLuong = new System.Windows.Forms.NumericUpDown();
@@ -42,8 +42,8 @@
         this.cbbSanPham = new System.Windows.Forms.ComboBox();
         this.label6 = new System.Windows.Forms.Label();
         this.panelBottom = new System.Windows.Forms.Panel();
-        this.btnReset = new System.Windows.Forms.Button();
-        this.btnTaoDonHang = new System.Windows.Forms.Button();
+        this.btnReset = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
+        this.btnTaoDonHang = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
         this.lblTongTien = new System.Windows.Forms.Label();
         this.label9 = new System.Windows.Forms.Label();
         this.panelLeft.SuspendLayout();
@@ -453,16 +453,16 @@
     private System.Windows.Forms.Label label2;
     private System.Windows.Forms.DataGridView dgvGioHang;
     private System.Windows.Forms.GroupBox gbThemSanPham;
-    private System.Windows.Forms.Button btnXoaSP;
-    private System.Windows.Forms.Button btnThemSP;
+    private CustomControls.RoundedButton btnXoaSP;
+    private CustomControls.RoundedButton btnThemSP;
+    private CustomControls.RoundedButton btnReset;
+    private CustomControls.RoundedButton btnTaoDonHang;
     private System.Windows.Forms.TextBox txtGiaBan;
     private System.Windows.Forms.Label label8;
     private System.Windows.Forms.NumericUpDown numSoLuong;
     private System.Windows.Forms.Label label7;
     private System.Windows.Forms.ComboBox cbbSanPham;
     private System.Windows.Forms.Label label6;
-    private System.Windows.Forms.Button btnReset;
-    private System.Windows.Forms.Button btnTaoDonHang;
     private System.Windows.Forms.Label lblTongTien;
     private System.Windows.Forms.Label label9;
 }

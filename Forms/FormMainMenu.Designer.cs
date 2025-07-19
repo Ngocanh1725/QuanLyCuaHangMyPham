@@ -41,14 +41,17 @@
             this.panelTitleBar = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.panelDesktopPane = new System.Windows.Forms.Panel();
+            this.pBoxLogo = new System.Windows.Forms.PictureBox();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             this.panelTitleBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMenu
             // 
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(203)))));
+            this.panelMenu.Controls.Add(this.pBoxLogo);
             this.panelMenu.Controls.Add(this.btnDangXuat);
             this.panelMenu.Controls.Add(this.btnThongKe);
             this.panelMenu.Controls.Add(this.btnNhanVien);
@@ -59,8 +62,9 @@
             this.panelMenu.Controls.Add(this.panelLogo);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
+            this.panelMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(220, 653);
+            this.panelMenu.Size = new System.Drawing.Size(165, 537);
             this.panelMenu.TabIndex = 0;
             // 
             // btnDangXuat
@@ -70,10 +74,12 @@
             this.btnDangXuat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDangXuat.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
             this.btnDangXuat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnDangXuat.Location = new System.Drawing.Point(0, 593);
+            this.btnDangXuat.Image = global::QuanLyCuaHangMyPham.Properties.Resources._4400828;
+            this.btnDangXuat.Location = new System.Drawing.Point(0, 488);
+            this.btnDangXuat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDangXuat.Name = "btnDangXuat";
-            this.btnDangXuat.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnDangXuat.Size = new System.Drawing.Size(220, 60);
+            this.btnDangXuat.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
+            this.btnDangXuat.Size = new System.Drawing.Size(165, 49);
             this.btnDangXuat.TabIndex = 7;
             this.btnDangXuat.Text = "  Đăng xuất";
             this.btnDangXuat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -88,10 +94,11 @@
             this.btnThongKe.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnThongKe.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
             this.btnThongKe.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnThongKe.Location = new System.Drawing.Point(0, 440);
+            this.btnThongKe.Location = new System.Drawing.Point(0, 359);
+            this.btnThongKe.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnThongKe.Name = "btnThongKe";
-            this.btnThongKe.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnThongKe.Size = new System.Drawing.Size(220, 60);
+            this.btnThongKe.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
+            this.btnThongKe.Size = new System.Drawing.Size(165, 49);
             this.btnThongKe.TabIndex = 6;
             this.btnThongKe.Text = "  Thống kê";
             this.btnThongKe.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -106,10 +113,11 @@
             this.btnNhanVien.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNhanVien.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
             this.btnNhanVien.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnNhanVien.Location = new System.Drawing.Point(0, 380);
+            this.btnNhanVien.Location = new System.Drawing.Point(0, 310);
+            this.btnNhanVien.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnNhanVien.Name = "btnNhanVien";
-            this.btnNhanVien.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnNhanVien.Size = new System.Drawing.Size(220, 60);
+            this.btnNhanVien.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
+            this.btnNhanVien.Size = new System.Drawing.Size(165, 49);
             this.btnNhanVien.TabIndex = 5;
             this.btnNhanVien.Text = "  Nhân viên";
             this.btnNhanVien.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -124,10 +132,12 @@
             this.btnKhoHang.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnKhoHang.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
             this.btnKhoHang.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnKhoHang.Location = new System.Drawing.Point(0, 320);
+            this.btnKhoHang.Image = global::QuanLyCuaHangMyPham.Properties.Resources.packages;
+            this.btnKhoHang.Location = new System.Drawing.Point(0, 261);
+            this.btnKhoHang.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnKhoHang.Name = "btnKhoHang";
-            this.btnKhoHang.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnKhoHang.Size = new System.Drawing.Size(220, 60);
+            this.btnKhoHang.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
+            this.btnKhoHang.Size = new System.Drawing.Size(165, 49);
             this.btnKhoHang.TabIndex = 4;
             this.btnKhoHang.Text = "  Kho hàng";
             this.btnKhoHang.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -142,10 +152,12 @@
             this.btnDonHang.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDonHang.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
             this.btnDonHang.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnDonHang.Location = new System.Drawing.Point(0, 260);
+            this.btnDonHang.Image = global::QuanLyCuaHangMyPham.Properties.Resources.cheque;
+            this.btnDonHang.Location = new System.Drawing.Point(0, 212);
+            this.btnDonHang.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDonHang.Name = "btnDonHang";
-            this.btnDonHang.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnDonHang.Size = new System.Drawing.Size(220, 60);
+            this.btnDonHang.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
+            this.btnDonHang.Size = new System.Drawing.Size(165, 49);
             this.btnDonHang.TabIndex = 3;
             this.btnDonHang.Text = "  Tạo đơn hàng";
             this.btnDonHang.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -160,10 +172,11 @@
             this.btnNhaCungCap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNhaCungCap.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
             this.btnNhaCungCap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnNhaCungCap.Location = new System.Drawing.Point(0, 200);
+            this.btnNhaCungCap.Location = new System.Drawing.Point(0, 163);
+            this.btnNhaCungCap.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnNhaCungCap.Name = "btnNhaCungCap";
-            this.btnNhaCungCap.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnNhaCungCap.Size = new System.Drawing.Size(220, 60);
+            this.btnNhaCungCap.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
+            this.btnNhaCungCap.Size = new System.Drawing.Size(165, 49);
             this.btnNhaCungCap.TabIndex = 2;
             this.btnNhaCungCap.Text = "  Nhà cung cấp";
             this.btnNhaCungCap.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -178,10 +191,11 @@
             this.btnSanPham.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSanPham.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
             this.btnSanPham.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnSanPham.Location = new System.Drawing.Point(0, 140);
+            this.btnSanPham.Location = new System.Drawing.Point(0, 114);
+            this.btnSanPham.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSanPham.Name = "btnSanPham";
-            this.btnSanPham.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.btnSanPham.Size = new System.Drawing.Size(220, 60);
+            this.btnSanPham.Padding = new System.Windows.Forms.Padding(9, 0, 0, 0);
+            this.btnSanPham.Size = new System.Drawing.Size(165, 49);
             this.btnSanPham.TabIndex = 1;
             this.btnSanPham.Text = "  Sản phẩm";
             this.btnSanPham.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -195,20 +209,22 @@
             this.panelLogo.Controls.Add(this.lblLogo);
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLogo.Location = new System.Drawing.Point(0, 0);
+            this.panelLogo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(220, 140);
+            this.panelLogo.Size = new System.Drawing.Size(165, 114);
             this.panelLogo.TabIndex = 0;
             // 
             // lblLogo
             // 
             this.lblLogo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblLogo.Font = new System.Drawing.Font("Arial Rounded MT Bold", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLogo.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLogo.ForeColor = System.Drawing.Color.White;
             this.lblLogo.Location = new System.Drawing.Point(0, 0);
+            this.lblLogo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblLogo.Name = "lblLogo";
-            this.lblLogo.Size = new System.Drawing.Size(220, 140);
+            this.lblLogo.Size = new System.Drawing.Size(165, 114);
             this.lblLogo.TabIndex = 0;
-            this.lblLogo.Text = "6MEMBERS\r\nCOSMETICS";
+            this.lblLogo.Text = "XÍNH ANH \r\nCOSMETICS";
             this.lblLogo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panelTitleBar
@@ -216,9 +232,10 @@
             this.panelTitleBar.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelTitleBar.Controls.Add(this.lblTitle);
             this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTitleBar.Location = new System.Drawing.Point(220, 0);
+            this.panelTitleBar.Location = new System.Drawing.Point(165, 0);
+            this.panelTitleBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelTitleBar.Name = "panelTitleBar";
-            this.panelTitleBar.Size = new System.Drawing.Size(862, 80);
+            this.panelTitleBar.Size = new System.Drawing.Size(648, 65);
             this.panelTitleBar.TabIndex = 1;
             // 
             // lblTitle
@@ -227,8 +244,9 @@
             this.lblTitle.Font = new System.Drawing.Font("Arial", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lblTitle.Location = new System.Drawing.Point(0, 0);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(862, 80);
+            this.lblTitle.Size = new System.Drawing.Size(648, 65);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "TRANG CHỦ";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -236,20 +254,32 @@
             // panelDesktopPane
             // 
             this.panelDesktopPane.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDesktopPane.Location = new System.Drawing.Point(220, 80);
+            this.panelDesktopPane.Location = new System.Drawing.Point(165, 65);
+            this.panelDesktopPane.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelDesktopPane.Name = "panelDesktopPane";
-            this.panelDesktopPane.Size = new System.Drawing.Size(862, 573);
+            this.panelDesktopPane.Size = new System.Drawing.Size(648, 472);
             this.panelDesktopPane.TabIndex = 2;
+            // 
+            // pBoxLogo
+            // 
+            this.pBoxLogo.Image = global::QuanLyCuaHangMyPham.Properties.Resources.images;
+            this.pBoxLogo.Location = new System.Drawing.Point(0, 413);
+            this.pBoxLogo.Name = "pBoxLogo";
+            this.pBoxLogo.Size = new System.Drawing.Size(165, 80);
+            this.pBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pBoxLogo.TabIndex = 0;
+            this.pBoxLogo.TabStop = false;
             // 
             // FormMainMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1082, 653);
+            this.ClientSize = new System.Drawing.Size(813, 537);
             this.Controls.Add(this.panelDesktopPane);
             this.Controls.Add(this.panelTitleBar);
             this.Controls.Add(this.panelMenu);
-            this.MinimumSize = new System.Drawing.Size(1100, 700);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MinimumSize = new System.Drawing.Size(829, 576);
             this.Name = "FormMainMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hệ thống Quản lý Cửa hàng Mỹ phẩm";
@@ -257,6 +287,7 @@
             this.panelMenu.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);
             this.panelTitleBar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -276,5 +307,6 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Panel panelDesktopPane;
         private System.Windows.Forms.Label lblLogo;
+        private System.Windows.Forms.PictureBox pBoxLogo;
     }
 }

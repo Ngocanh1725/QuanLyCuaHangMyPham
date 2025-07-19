@@ -13,9 +13,20 @@ namespace QuanLyCuaHangMyPham
 
         private void FormNhaCungCap_Load(object sender, EventArgs e)
         {
+            SetupDataGridView();
             LoadNhaCungCapList();
             AddNhaCungCapBinding();
         }
+        void SetupDataGridView()
+        {
+            dgvNhaCungCap.AutoGenerateColumns = false;
+            dgvNhaCungCap.Columns.Clear();
+            dgvNhaCungCap.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "MaNCC", HeaderText = "Mã NCC" });
+            dgvNhaCungCap.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "TenNCC", HeaderText = "Tên Nhà Cung Cấp" });
+            dgvNhaCungCap.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Email", HeaderText = "Email" });
+            dgvNhaCungCap.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "SDTLH", HeaderText = "SĐT Liên Hệ" });
+        }
+
 
         void LoadNhaCungCapList()
         {

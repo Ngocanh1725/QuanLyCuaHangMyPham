@@ -2,15 +2,8 @@
 {
     partial class FormLogin
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -21,23 +14,16 @@
         }
 
         #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            // Giả sử bạn có một hình ảnh tên "background.jpg" trong Resources
-            // this.BackgroundImage = global::QuanLyCuaHangMyPham.Properties.Resources.background;
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblTaiKhoan = new System.Windows.Forms.Label();
             this.lblMatKhau = new System.Windows.Forms.Label();
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.chkShowPassword = new System.Windows.Forms.CheckBox();
-            this.btnLogin = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
+            this.btnLogin = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
+            this.btnExit = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
             this.SuspendLayout();
             // 
             // lblWelcome
@@ -107,7 +93,10 @@
             // btnLogin
             // 
             this.btnLogin.BackColor = System.Drawing.Color.DodgerBlue;
-            this.btnLogin.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.BorderRadius = 20;
+            this.btnLogin.FlatAppearance.BorderSize = 0;
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Bold);
             this.btnLogin.ForeColor = System.Drawing.Color.White;
             this.btnLogin.Location = new System.Drawing.Point(288, 280);
             this.btnLogin.Name = "btnLogin";
@@ -120,7 +109,10 @@
             // btnExit
             // 
             this.btnExit.BackColor = System.Drawing.Color.LightCoral;
-            this.btnExit.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.BorderRadius = 20;
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Bold);
             this.btnExit.ForeColor = System.Drawing.Color.White;
             this.btnExit.Location = new System.Drawing.Point(288, 340);
             this.btnExit.Name = "btnExit";
@@ -154,7 +146,6 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
-
         #endregion
 
         private System.Windows.Forms.Label lblWelcome;
@@ -163,7 +154,7 @@
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.CheckBox chkShowPassword;
-        private System.Windows.Forms.Button btnLogin;
-        private System.Windows.Forms.Button btnExit;
+        private CustomControls.RoundedButton btnLogin;
+        private CustomControls.RoundedButton btnExit;
     }
 }

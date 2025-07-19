@@ -27,12 +27,12 @@ namespace QuanLyCuaHangMyPham
             {
                 TaiKhoanDTO loginAccount = TaiKhoanBLL.Instance.GetAccountByUserName(userName);
 
-                MessageBox.Show($"Đăng nhập thành công với quyền {loginAccount.PhanQuyen}!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                // Tạm thời đóng form vì chưa có FormMain
                 FormMainMenu f = new FormMainMenu(loginAccount);
                 this.Hide();
                 f.ShowDialog();
-                this.Show(); // Hiển thị lại form login sau khi form main đóng
+
+                this.txtPassword.Clear();
+                this.Show();
             }
             else
             {
@@ -52,9 +52,16 @@ namespace QuanLyCuaHangMyPham
 
         private void FormLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Bạn có thật sự muốn thoát chương trình?", "Thông báo", MessageBoxButtons.OKCancel) != System.Windows.Forms.DialogResult.OK)
+            if (e.CloseReason == CloseReason.UserClosing)
             {
-                e.Cancel = true;
+                if (MessageBox.Show("Bạn có thật sự muốn thoát chương trình?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) != DialogResult.OK)
+                {
+                    e.Cancel = true;
+                }
+                else
+                {
+                    Application.Exit();
+                }
             }
         }
     }

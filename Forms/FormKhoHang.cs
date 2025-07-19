@@ -13,7 +13,17 @@ namespace QuanLyCuaHangMyPham
 
         private void FormKhoHang_Load(object sender, EventArgs e)
         {
+            SetupDataGridView();
             LoadKhoHangList();
+        }
+        void SetupDataGridView()
+        {
+            dgvKhoHang.AutoGenerateColumns = false;
+            dgvKhoHang.Columns.Clear();
+            dgvKhoHang.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "MaSP", HeaderText = "Mã SP" });
+            dgvKhoHang.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "TenSP", HeaderText = "Tên Sản Phẩm" });
+            dgvKhoHang.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "SoLuong", HeaderText = "Số Lượng Tồn" });
+            dgvKhoHang.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "NgayNhap", HeaderText = "Ngày Nhập Cuối" });
         }
 
         void LoadKhoHangList()

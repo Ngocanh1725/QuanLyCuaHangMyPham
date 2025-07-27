@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text.RegularExpressions; // Thêm using cho Regex
 using System.Windows.Forms; // For MessageBox
 
 namespace QuanLyCuaHangMyPham.DAL
@@ -38,14 +39,18 @@ namespace QuanLyCuaHangMyPham.DAL
 
                     if (parameters != null)
                     {
-                        string[] listPara = query.Split(' ');
-                        int i = 0;
-                        foreach (string item in listPara)
+                        // Sửa lỗi: Sử dụng Regex để tìm tham số một cách chính xác
+                        var paramNames = Regex.Matches(query, @"@\w+")
+                                              .Cast<Match>()
+                                              .Select(m => m.Value)
+                                              .Distinct()
+                                              .ToList();
+
+                        for (int i = 0; i < paramNames.Count; i++)
                         {
-                            if (item.Contains('@'))
+                            if (i < parameters.Length)
                             {
-                                command.Parameters.AddWithValue(item, parameters[i]);
-                                i++;
+                                command.Parameters.AddWithValue(paramNames[i], parameters[i]);
                             }
                         }
                     }
@@ -80,14 +85,18 @@ namespace QuanLyCuaHangMyPham.DAL
 
                     if (parameters != null)
                     {
-                        string[] listPara = query.Split(' ');
-                        int i = 0;
-                        foreach (string item in listPara)
+                        // Sửa lỗi: Sử dụng Regex để tìm tham số một cách chính xác
+                        var paramNames = Regex.Matches(query, @"@\w+")
+                                              .Cast<Match>()
+                                              .Select(m => m.Value)
+                                              .Distinct()
+                                              .ToList();
+
+                        for (int i = 0; i < paramNames.Count; i++)
                         {
-                            if (item.Contains('@'))
+                            if (i < parameters.Length)
                             {
-                                command.Parameters.AddWithValue(item, parameters[i]);
-                                i++;
+                                command.Parameters.AddWithValue(paramNames[i], parameters[i]);
                             }
                         }
                     }
@@ -123,14 +132,18 @@ namespace QuanLyCuaHangMyPham.DAL
 
                     if (parameters != null)
                     {
-                        string[] listPara = query.Split(' ');
-                        int i = 0;
-                        foreach (string item in listPara)
+                        // Sửa lỗi: Sử dụng Regex để tìm tham số một cách chính xác
+                        var paramNames = Regex.Matches(query, @"@\w+")
+                                              .Cast<Match>()
+                                              .Select(m => m.Value)
+                                              .Distinct()
+                                              .ToList();
+
+                        for (int i = 0; i < paramNames.Count; i++)
                         {
-                            if (item.Contains('@'))
+                            if (i < parameters.Length)
                             {
-                                command.Parameters.AddWithValue(item, parameters[i]);
-                                i++;
+                                command.Parameters.AddWithValue(paramNames[i], parameters[i]);
                             }
                         }
                     }

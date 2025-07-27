@@ -1,6 +1,7 @@
 ﻿using QuanLyCuaHangMyPham.DTO;
 using System;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace QuanLyCuaHangMyPham.DAL
 {
@@ -18,11 +19,10 @@ namespace QuanLyCuaHangMyPham.DAL
 
         public DataTable GetListNhanVien()
         {
-            // Lấy thông tin nhân viên cùng với mật khẩu từ bảng TaiKhoan
             string query = @"
                 SELECT nv.MaNV, nv.TenNV, nv.SDT, nv.QueQuan, nv.Email, nv.TenTK, tk.MatKhau
                 FROM NhanVien AS nv
-                JOIN TaiKhoan AS tk ON nv.TenTK = tk.TenTK";
+                LEFT JOIN TaiKhoan AS tk ON nv.TenTK = tk.TenTK";
             return DataProvider.Instance.ExecuteQuery(query);
         }
 
@@ -37,25 +37,112 @@ namespace QuanLyCuaHangMyPham.DAL
             return null;
         }
 
-        public bool InsertNhanVien(NhanVienDTO nv)
+        public bool InsertNhanVienWithAccount(NhanVienDTO nv, TaiKhoanDTO tk)
         {
-            string query = "INSERT INTO NhanVien (MaNV, TenNV, SDT, QueQuan, Email, TenTK) VALUES ( @MaNV , @TenNV , @SDT , @QueQuan , @Email , @TenTK )";
-            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { nv.MaNV, nv.TenNV, nv.SDT, nv.QueQuan, nv.Email, nv.TenTK });
-            return result > 0;
+            using (SqlConnection conn = new SqlConnection(DataProvider.Instance.ConnectionString))
+            {
+                conn.Open();
+                SqlTransaction transaction = conn.BeginTransaction();
+                try
+                {
+                    // Thêm tài khoản
+                    string tkQuery = "INSERT INTO TaiKhoan (TenTK, MatKhau, PhanQuyen) VALUES (@TenTK, @MatKhau, @PhanQuyen)";
+                    SqlCommand tkCommand = new SqlCommand(tkQuery, conn, transaction);
+                    tkCommand.Parameters.AddWithValue("@TenTK", tk.TenTK);
+                    tkCommand.Parameters.AddWithValue("@MatKhau", tk.MatKhau);
+                    tkCommand.Parameters.AddWithValue("@PhanQuyen", tk.PhanQuyen);
+                    tkCommand.ExecuteNonQuery();
+
+                    // Thêm nhân viên
+                    string nvQuery = "INSERT INTO NhanVien (MaNV, TenNV, SDT, QueQuan, Email, TenTK) VALUES (@MaNV, @TenNV, @SDT, @QueQuan, @Email, @TenTK_nv)";
+                    SqlCommand nvCommand = new SqlCommand(nvQuery, conn, transaction);
+                    nvCommand.Parameters.AddWithValue("@MaNV", nv.MaNV);
+                    nvCommand.Parameters.AddWithValue("@TenNV", nv.TenNV);
+                    nvCommand.Parameters.AddWithValue("@SDT", nv.SDT);
+                    nvCommand.Parameters.AddWithValue("@QueQuan", nv.QueQuan);
+                    nvCommand.Parameters.AddWithValue("@Email", nv.Email);
+                    nvCommand.Parameters.AddWithValue("@TenTK_nv", nv.TenTK);
+                    nvCommand.ExecuteNonQuery();
+
+                    transaction.Commit();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    return false;
+                }
+            }
         }
 
-        public bool UpdateNhanVien(NhanVienDTO nv)
+        public bool UpdateNhanVienAndAccount(NhanVienDTO nv, string newMatKhau)
         {
-            string query = "UPDATE NhanVien SET TenNV = @TenNV , SDT = @SDT , QueQuan = @QueQuan , Email = @Email WHERE MaNV = @MaNV";
-            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { nv.TenNV, nv.SDT, nv.QueQuan, nv.Email, nv.MaNV });
-            return result > 0;
+            using (SqlConnection conn = new SqlConnection(DataProvider.Instance.ConnectionString))
+            {
+                conn.Open();
+                SqlTransaction transaction = conn.BeginTransaction();
+                try
+                {
+                    // Cập nhật nhân viên
+                    string nvQuery = "UPDATE NhanVien SET TenNV = @TenNV, SDT = @SDT, QueQuan = @QueQuan, Email = @Email WHERE MaNV = @MaNV";
+                    SqlCommand nvCommand = new SqlCommand(nvQuery, conn, transaction);
+                    nvCommand.Parameters.AddWithValue("@TenNV", nv.TenNV);
+                    nvCommand.Parameters.AddWithValue("@SDT", nv.SDT);
+                    nvCommand.Parameters.AddWithValue("@QueQuan", nv.QueQuan);
+                    nvCommand.Parameters.AddWithValue("@Email", nv.Email);
+                    nvCommand.Parameters.AddWithValue("@MaNV", nv.MaNV);
+                    nvCommand.ExecuteNonQuery();
+
+                    // Cập nhật tài khoản
+                    string tkQuery = "UPDATE TaiKhoan SET MatKhau = @MatKhau WHERE TenTK = @TenTK";
+                    SqlCommand tkCommand = new SqlCommand(tkQuery, conn, transaction);
+                    tkCommand.Parameters.AddWithValue("@MatKhau", newMatKhau);
+                    tkCommand.Parameters.AddWithValue("@TenTK", nv.TenTK);
+                    tkCommand.ExecuteNonQuery();
+
+                    transaction.Commit();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    return false;
+                }
+            }
         }
 
-        public bool DeleteNhanVien(string maNV)
+        public bool DeleteNhanVienAndAccount(string maNV)
         {
-            string query = "DELETE FROM NhanVien WHERE MaNV = @MaNV";
-            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { maNV });
-            return result > 0;
+            NhanVienDTO nv = GetNhanVienByMaNV(maNV);
+            if (nv == null) return false;
+
+            using (SqlConnection conn = new SqlConnection(DataProvider.Instance.ConnectionString))
+            {
+                conn.Open();
+                SqlTransaction transaction = conn.BeginTransaction();
+                try
+                {
+                    // Xóa nhân viên
+                    string nvQuery = "DELETE FROM NhanVien WHERE MaNV = @MaNV";
+                    SqlCommand nvCommand = new SqlCommand(nvQuery, conn, transaction);
+                    nvCommand.Parameters.AddWithValue("@MaNV", maNV);
+                    nvCommand.ExecuteNonQuery();
+
+                    // Xóa tài khoản
+                    string tkQuery = "DELETE FROM TaiKhoan WHERE TenTK = @TenTK";
+                    SqlCommand tkCommand = new SqlCommand(tkQuery, conn, transaction);
+                    tkCommand.Parameters.AddWithValue("@TenTK", nv.TenTK);
+                    tkCommand.ExecuteNonQuery();
+
+                    transaction.Commit();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    return false;
+                }
+            }
         }
 
         public DataTable SearchNhanVien(string keyword)

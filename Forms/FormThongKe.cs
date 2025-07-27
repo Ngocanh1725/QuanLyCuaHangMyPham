@@ -1,5 +1,6 @@
 ﻿using QuanLyCuaHangMyPham.BLL;
 using QuanLyCuaHangMyPham.DTO;
+using QuanLyCuaHangMyPham.Forms; // Thêm using để gọi FormChiTietDonHang
 using System;
 using System.Data;
 using System.Linq;
@@ -97,6 +98,39 @@ namespace QuanLyCuaHangMyPham
                 series.Points[0].Label = " ";
             }
             chartTopSP.Invalidate();
+        }
+
+        private void btnXemChiTiet_Click(object sender, EventArgs e)
+        {
+            if (dgvDonHang.SelectedRows.Count > 0)
+            {
+                try
+                {
+                    DataRowView drv = dgvDonHang.SelectedRows[0].DataBoundItem as DataRowView;
+                    if (drv != null)
+                    {
+                        DonHangDTO selectedDonHang = new DonHangDTO(
+                            maDH: drv["MaDH"].ToString(),
+                            tenKH: drv["TenKH"].ToString(),
+                            sdtkh: drv["SDTKH"].ToString(),
+                            diaChi: drv["DiaChi"].ToString(),
+                            ngayMua: Convert.ToDateTime(drv["NgayMua"]),
+                            maNV: drv["MaNV"].ToString()
+                        );
+
+                        FormChiTietDonHang f = new FormChiTietDonHang(selectedDonHang);
+                        f.ShowDialog();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Không thể lấy dữ liệu đơn hàng: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một đơn hàng để xem chi tiết.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }

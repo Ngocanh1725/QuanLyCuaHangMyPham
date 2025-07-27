@@ -1,5 +1,6 @@
 ﻿using QuanLyCuaHangMyPham.BLL;
 using QuanLyCuaHangMyPham.DTO;
+using QuanLyCuaHangMyPham.Forms; // Thêm using để gọi FormChiTietDonHang
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,7 @@ namespace QuanLyCuaHangMyPham
     {
         private BindingList<ChiTietDonHangDTO> gioHang = new BindingList<ChiTietDonHangDTO>();
         private TaiKhoanDTO loginAccount;
+        private DonHangDTO createdDonHang = null; // Lưu lại đơn hàng vừa tạo
 
         public FormDonHang(TaiKhoanDTO acc)
         {
@@ -130,6 +132,8 @@ namespace QuanLyCuaHangMyPham
                 return;
             }
 
+            // Tối ưu UX: Vô hiệu hóa nút để tránh click đúp
+            btnTaoDonHang.Enabled = false;
             try
             {
                 DonHangDTO dh = new DonHangDTO(
@@ -151,17 +155,24 @@ namespace QuanLyCuaHangMyPham
                 if (DonHangBLL.Instance.CreateDonHang(dh, listChiTiet))
                 {
                     MessageBox.Show("Tạo đơn hàng thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ResetForm();
+                    createdDonHang = dh; // Lưu lại đơn hàng vừa tạo
                     LoadComboBoxes(); // Load lại sản phẩm vì số lượng tồn đã thay đổi
                 }
                 else
                 {
-                    MessageBox.Show("Tạo đơn hàng thất bại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Tạo đơn hàng thất bại! Mã đơn hàng có thể đã tồn tại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    createdDonHang = null;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Đã xảy ra lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                createdDonHang = null;
+            }
+            finally
+            {
+                // Tối ưu UX: Kích hoạt lại nút sau khi xử lý xong
+                btnTaoDonHang.Enabled = true;
             }
         }
 
@@ -176,11 +187,25 @@ namespace QuanLyCuaHangMyPham
             gioHang.Clear();
             UpdateTongTien();
             txtMaDH.Focus();
+            createdDonHang = null; // Xóa đơn hàng đã lưu
         }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
             ResetForm();
+        }
+
+        private void btnXemChiTiet_Click(object sender, EventArgs e)
+        {
+            if (createdDonHang != null)
+            {
+                FormChiTietDonHang f = new FormChiTietDonHang(createdDonHang);
+                f.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Bạn cần tạo một đơn hàng thành công trước khi xem chi tiết.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

@@ -16,19 +16,22 @@ namespace QuanLyCuaHangMyPham.DAL
         public DataTable GetThongKeDonHang(DateTime fromDate, DateTime toDate)
         {
 
-            // Lấy danh sách đơn hàng và tổng tiền của mỗi đơn
+            // Sửa lỗi: Cập nhật câu truy vấn để lấy đủ các trường cho DonHangDTO
             string query = @"
                 SELECT 
                     dh.MaDH, 
                     dh.TenKH, 
+                    dh.SDTKH,
+                    dh.DiaChi,
                     dh.NgayMua, 
+                    dh.MaNV,
                     nv.TenNV, 
-                    SUM(ct.ThanhTien) AS TongTien
+                    SUM(ct.SoLuong * ct.GiaBan) AS TongTien
                 FROM DonHang AS dh
                 JOIN NhanVien AS nv ON dh.MaNV = nv.MaNV
                 JOIN ChiTietDonHang AS ct ON dh.MaDH = ct.MaDH
                 WHERE dh.NgayMua BETWEEN @fromDate AND @toDate
-                GROUP BY dh.MaDH, dh.TenKH, dh.NgayMua, nv.TenNV
+                GROUP BY dh.MaDH, dh.TenKH, dh.SDTKH, dh.DiaChi, dh.NgayMua, dh.MaNV, nv.TenNV
                 ORDER BY dh.NgayMua DESC";
 
             return DataProvider.Instance.ExecuteQuery(query, new object[] { fromDate, toDate });

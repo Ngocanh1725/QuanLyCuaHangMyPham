@@ -15,6 +15,7 @@ namespace QuanLyCuaHangMyPham.DAL
 
         public DataTable GetThongKeDonHang(DateTime fromDate, DateTime toDate)
         {
+
             // Lấy danh sách đơn hàng và tổng tiền của mỗi đơn
             string query = @"
                 SELECT 

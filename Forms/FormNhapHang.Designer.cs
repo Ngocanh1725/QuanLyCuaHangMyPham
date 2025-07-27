@@ -20,8 +20,8 @@
             this.numSoLuong = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.dtpNgayNhap = new System.Windows.Forms.DateTimePicker();
-            this.btnNhapHang = new System.Windows.Forms.Button();
-            this.btnHuy = new System.Windows.Forms.Button();
+            this.btnNhapHang = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
+            this.btnHuy = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
             ((System.ComponentModel.ISupportInitialize)(this.numSoLuong)).BeginInit();
             this.SuspendLayout();
             // 
@@ -146,7 +146,7 @@
         private System.Windows.Forms.NumericUpDown numSoLuong;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker dtpNgayNhap;
-        private System.Windows.Forms.Button btnNhapHang;
-        private System.Windows.Forms.Button btnHuy;
+        private CustomControls.RoundedButton btnNhapHang;
+        private CustomControls.RoundedButton btnHuy;
     }
 }

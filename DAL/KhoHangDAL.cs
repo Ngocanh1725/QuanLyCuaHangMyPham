@@ -44,15 +44,15 @@ namespace QuanLyCuaHangMyPham.DAL
             // Sử dụng MERGE để vừa UPDATE (nếu đã có) vừa INSERT (nếu chưa có)
             string query = @"
                 MERGE KhoHang AS target
-                USING (SELECT @MaSP AS MaSP) AS source
+                USING (SELECT @MaSP AS MaSP, @SoLuong AS SoLuong, @NgayNhap AS NgayNhap) AS source
                 ON (target.MaSP = source.MaSP)
                 WHEN MATCHED THEN
-                    UPDATE SET SoLuong = target.SoLuong + @SoLuong, NgayNhap = @NgayNhap
+                    UPDATE SET SoLuong = target.SoLuong + source.SoLuong, NgayNhap = source.NgayNhap
                 WHEN NOT MATCHED THEN
                     INSERT (MaSP, SoLuong, NgayNhap)
-                    VALUES (@MaSP_Insert, @SoLuong_Insert, @NgayNhap_Insert);";
+                    VALUES (source.MaSP, source.SoLuong, source.NgayNhap);";
 
-            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { maSP, soLuong, ngayNhap, maSP, soLuong, ngayNhap });
+            int result = DataProvider.Instance.ExecuteNonQuery(query, new object[] { maSP, soLuong, ngayNhap });
             return result > 0;
         }
     }

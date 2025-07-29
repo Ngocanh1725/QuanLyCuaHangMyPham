@@ -16,6 +16,7 @@ namespace QuanLyCuaHangMyPham
             SetupDataGridView();
             LoadNhaCungCapList();
             AddNhaCungCapBinding();
+            ResetFields(); // Gọi ResetFields để tạo mã mới khi form load
         }
         void SetupDataGridView()
         {
@@ -30,15 +31,12 @@ namespace QuanLyCuaHangMyPham
 
         void LoadNhaCungCapList()
         {
-            // Xóa binding cũ để tránh lỗi
             txtMaNCC.DataBindings.Clear();
             txtTenNCC.DataBindings.Clear();
             txtEmail.DataBindings.Clear();
             txtSDT.DataBindings.Clear();
 
             dgvNhaCungCap.DataSource = NhaCungCapBLL.Instance.GetListNhaCungCap();
-
-        
         }
 
         void AddNhaCungCapBinding()
@@ -49,13 +47,23 @@ namespace QuanLyCuaHangMyPham
             txtSDT.DataBindings.Add(new Binding("Text", dgvNhaCungCap.DataSource, "SDTLH", true, DataSourceUpdateMode.Never));
         }
 
+        void ResetFields()
+        {
+            txtMaNCC.Text = NhaCungCapBLL.Instance.GenerateNextMaNCC();
+            txtTenNCC.Clear();
+            txtEmail.Clear();
+            txtSDT.Clear();
+            txtTimKiem.Clear();
+            txtTenNCC.Focus();
+        }
+
         private void btnThem_Click(object sender, EventArgs e)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(txtMaNCC.Text) || string.IsNullOrWhiteSpace(txtTenNCC.Text))
+                if (string.IsNullOrWhiteSpace(txtTenNCC.Text))
                 {
-                    MessageBox.Show("Mã và Tên Nhà cung cấp không được để trống!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Tên Nhà cung cấp không được để trống!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -63,6 +71,7 @@ namespace QuanLyCuaHangMyPham
                 {
                     MessageBox.Show("Thêm nhà cung cấp thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadNhaCungCapList();
+                    ResetFields();
                 }
                 else
                 {
@@ -83,6 +92,7 @@ namespace QuanLyCuaHangMyPham
                 {
                     MessageBox.Show("Cập nhật nhà cung cấp thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadNhaCungCapList();
+                    ResetFields();
                 }
                 else
                 {
@@ -105,6 +115,7 @@ namespace QuanLyCuaHangMyPham
                     {
                         MessageBox.Show("Xóa nhà cung cấp thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadNhaCungCapList();
+                        ResetFields();
                     }
                     else
                     {
@@ -125,11 +136,7 @@ namespace QuanLyCuaHangMyPham
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            txtMaNCC.Clear();
-            txtTenNCC.Clear();
-            txtEmail.Clear();
-            txtSDT.Clear();
-            txtTimKiem.Clear();
+            ResetFields();
             LoadNhaCungCapList();
         }
     }

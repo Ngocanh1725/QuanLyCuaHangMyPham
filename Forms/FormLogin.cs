@@ -23,10 +23,10 @@ namespace QuanLyCuaHangMyPham
                 return;
             }
 
-            if (TaiKhoanBLL.Instance.Login(userName, passWord))
-            {
-                TaiKhoanDTO loginAccount = TaiKhoanBLL.Instance.GetAccountByUserName(userName);
+            TaiKhoanDTO loginAccount = TaiKhoanBLL.Instance.Login(userName, passWord);
 
+            if (loginAccount != null)
+            {
                 FormMainMenu f = new FormMainMenu(loginAccount);
                 this.Hide();
                 f.ShowDialog();

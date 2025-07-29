@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text.RegularExpressions; // Thêm using cho Regex
-using System.Windows.Forms; // For MessageBox
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace QuanLyCuaHangMyPham.DAL
 {
@@ -26,8 +27,7 @@ namespace QuanLyCuaHangMyPham.DAL
 
         private DataProvider() { }
 
-        // Tối ưu: Thêm try-catch để xử lý lỗi kết nối tập trung
-        private DataTable ExecuteQueryInternal(string query, object[] parameters = null)
+        public DataTable ExecuteQuery(string query, object[] parameters = null)
         {
             DataTable data = new DataTable();
             try
@@ -39,25 +39,18 @@ namespace QuanLyCuaHangMyPham.DAL
 
                     if (parameters != null)
                     {
-                        // Sửa lỗi: Sử dụng Regex để tìm tham số một cách chính xác
-                        var paramNames = Regex.Matches(query, @"@\w+")
-                                              .Cast<Match>()
-                                              .Select(m => m.Value)
-                                              .Distinct()
-                                              .ToList();
-
+                        var paramNames = Regex.Matches(query, @"@\w+").Cast<Match>().Select(m => m.Value).Distinct().ToList();
                         for (int i = 0; i < paramNames.Count; i++)
                         {
                             if (i < parameters.Length)
                             {
-                                command.Parameters.AddWithValue(paramNames[i], parameters[i]);
+                                command.Parameters.AddWithValue(paramNames[i], parameters[i] ?? DBNull.Value);
                             }
                         }
                     }
 
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
                     adapter.Fill(data);
-                    connection.Close();
                 }
             }
             catch (SqlException ex)
@@ -67,13 +60,7 @@ namespace QuanLyCuaHangMyPham.DAL
             return data;
         }
 
-        public DataTable ExecuteQuery(string query, object[] parameters = null)
-        {
-            return ExecuteQueryInternal(query, parameters);
-        }
-
-        // Tối ưu: Thêm try-catch để xử lý lỗi thực thi tập trung
-        private int ExecuteNonQueryInternal(string query, object[] parameters = null)
+        public int ExecuteNonQuery(string query, object[] parameters = null)
         {
             int data = 0;
             try
@@ -85,41 +72,71 @@ namespace QuanLyCuaHangMyPham.DAL
 
                     if (parameters != null)
                     {
-                        // Sửa lỗi: Sử dụng Regex để tìm tham số một cách chính xác
-                        var paramNames = Regex.Matches(query, @"@\w+")
-                                              .Cast<Match>()
-                                              .Select(m => m.Value)
-                                              .Distinct()
-                                              .ToList();
-
+                        var paramNames = Regex.Matches(query, @"@\w+").Cast<Match>().Select(m => m.Value).Distinct().ToList();
                         for (int i = 0; i < paramNames.Count; i++)
                         {
                             if (i < parameters.Length)
                             {
-                                command.Parameters.AddWithValue(paramNames[i], parameters[i]);
+                                command.Parameters.AddWithValue(paramNames[i], parameters[i] ?? DBNull.Value);
                             }
                         }
                     }
 
                     data = command.ExecuteNonQuery();
-                    connection.Close();
                 }
             }
             catch (SqlException ex)
             {
-                // Ném lại ngoại lệ để tầng BLL có thể bắt và xử lý lỗi nghiệp vụ
-                // Ví dụ: Lỗi trùng khóa chính
                 throw ex;
             }
             return data;
         }
 
-        public int ExecuteNonQuery(string query, object[] parameters = null)
+        // Overload mới để xử lý cả object[] và SqlParameter[]
+        public int ExecuteNonQuery(string query, object[] objectParameters, SqlParameter[] sqlParameters)
         {
-            return ExecuteNonQueryInternal(query, parameters);
+            int data = 0;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(query, connection);
+
+                    if (objectParameters != null)
+                    {
+                        var paramNames = Regex.Matches(query, @"@\w+").Cast<Match>().Select(m => m.Value).Distinct().ToList();
+                        int objectParamIndex = 0;
+                        foreach (var name in paramNames)
+                        {
+                            if (sqlParameters != null && sqlParameters.Any(p => p.ParameterName == name))
+                            {
+                                continue;
+                            }
+                            if (objectParamIndex < objectParameters.Length)
+                            {
+                                command.Parameters.AddWithValue(name, objectParameters[objectParamIndex] ?? DBNull.Value);
+                                objectParamIndex++;
+                            }
+                        }
+                    }
+
+                    if (sqlParameters != null)
+                    {
+                        command.Parameters.AddRange(sqlParameters);
+                    }
+
+                    data = command.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            return data;
         }
 
-        // Tối ưu: Thêm try-catch
+
         public object ExecuteScalar(string query, object[] parameters = null)
         {
             object data = null;
@@ -132,24 +149,17 @@ namespace QuanLyCuaHangMyPham.DAL
 
                     if (parameters != null)
                     {
-                        // Sửa lỗi: Sử dụng Regex để tìm tham số một cách chính xác
-                        var paramNames = Regex.Matches(query, @"@\w+")
-                                              .Cast<Match>()
-                                              .Select(m => m.Value)
-                                              .Distinct()
-                                              .ToList();
-
+                        var paramNames = Regex.Matches(query, @"@\w+").Cast<Match>().Select(m => m.Value).Distinct().ToList();
                         for (int i = 0; i < paramNames.Count; i++)
                         {
                             if (i < parameters.Length)
                             {
-                                command.Parameters.AddWithValue(paramNames[i], parameters[i]);
+                                command.Parameters.AddWithValue(paramNames[i], parameters[i] ?? DBNull.Value);
                             }
                         }
                     }
 
                     data = command.ExecuteScalar();
-                    connection.Close();
                 }
             }
             catch (SqlException ex)

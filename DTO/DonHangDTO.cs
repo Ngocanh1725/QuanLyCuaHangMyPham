@@ -31,5 +31,16 @@ namespace QuanLyCuaHangMyPham.DTO
             this.NgayMua = (DateTime)row["NgayMua"];
             this.MaNV = row["MaNV"].ToString();
         }
+
+        // Tối ưu: Thêm constructor từ DataRowView
+        public DonHangDTO(DataRowView rowView)
+        {
+            this.MaDH = rowView["MaDH"].ToString();
+            this.TenKH = rowView["TenKH"].ToString();
+            this.SDTKH = rowView["SDTKH"].ToString();
+            this.DiaChi = rowView["DiaChi"].ToString();
+            this.NgayMua = (DateTime)rowView["NgayMua"];
+            this.MaNV = rowView["MaNV"].ToString();
+        }
     }
 }

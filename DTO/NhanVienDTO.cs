@@ -11,6 +11,7 @@ namespace QuanLyCuaHangMyPham.DTO
         public string QueQuan { get; set; }
         public string Email { get; set; }
         public string TenTK { get; set; }
+        public string PhanQuyen { get; set; } // Thêm thuộc tính Phân Quyền
 
         public NhanVienDTO(string maNV, string tenNV, string sdt, string queQuan, string email, string tenTK)
         {
@@ -30,6 +31,12 @@ namespace QuanLyCuaHangMyPham.DTO
             this.QueQuan = row["QueQuan"].ToString();
             this.Email = row["Email"].ToString();
             this.TenTK = row["TenTK"].ToString();
+            // Thêm: Lấy dữ liệu Phân Quyền từ DataRow
+            if (row.Table.Columns.Contains("PhanQuyen"))
+            {
+                this.PhanQuyen = row["PhanQuyen"].ToString();
+            }
         }
     }
 }
+

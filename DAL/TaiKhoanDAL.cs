@@ -16,11 +16,15 @@ namespace QuanLyCuaHangMyPham.DAL
 
         private TaiKhoanDAL() { }
 
-        public bool Login(string userName, string passWord)
+        public TaiKhoanDTO Login(string userName, string passWord)
         {
             string query = "SELECT * FROM TaiKhoan WHERE TenTK = @userName AND MatKhau = @passWord";
             DataTable result = DataProvider.Instance.ExecuteQuery(query, new object[] { userName, passWord });
-            return result.Rows.Count > 0;
+            if (result.Rows.Count > 0)
+            {
+                return new TaiKhoanDTO(result.Rows[0]);
+            }
+            return null;
         }
 
         public TaiKhoanDTO GetAccountByUserName(string userName)

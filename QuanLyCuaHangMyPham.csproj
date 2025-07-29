@@ -50,6 +50,7 @@
     <Compile Include="BLL\ChiTietDonHangBLL.cs" />
     <Compile Include="BLL\DonHangBLL.cs" />
     <Compile Include="BLL\KhoHangBLL.cs" />
+    <Compile Include="BLL\LoaiSanPhamBLL.cs" />
     <Compile Include="BLL\NhaCungCapBLL.cs" />
     <Compile Include="BLL\NhanVienBLL.cs" />
     <Compile Include="BLL\SanPhamBLL.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="DAL\DataProvider.cs" />
     <Compile Include="DAL\DonHangDAL.cs" />
     <Compile Include="DAL\KhoHangDAL.cs" />
+    <Compile Include="DAL\LoaiSanPhamDAL.cs" />
     <Compile Include="DAL\NhaCungCapDAL.cs" />
     <Compile Include="DAL\NhanVienDAL.cs" />
     <Compile Include="DAL\SanPhamDAL.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="DAL\ThongKeDAL.cs" />
     <Compile Include="DTO\ChiTietDonHangDTO.cs" />
     <Compile Include="DTO\DonHangDTO.cs" />
+    <Compile Include="DTO\LoaiSanPhamDTO.cs" />
     <Compile Include="DTO\NhaCungCapDTO.cs" />
     <Compile Include="DTO\NhanVienDTO.cs" />
     <Compile Include="DTO\SanPhamDTO.cs" />
@@ -148,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormNhaCungCap.resx">
       <DependentUpon>FormNhaCungCap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormThongKe.resx">
+      <DependentUpon>FormThongKe.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -16,10 +16,8 @@ namespace QuanLyCuaHangMyPham.BLL
 
         private TaiKhoanBLL() { }
 
-        public bool Login(string userName, string passWord)
+        public TaiKhoanDTO Login(string userName, string passWord)
         {
-            // Có thể thêm các logic kiểm tra dữ liệu đầu vào ở đây
-            // Ví dụ: kiểm tra userName, passWord có rỗng không, có hợp lệ không...
             return TaiKhoanDAL.Instance.Login(userName, passWord);
         }
 

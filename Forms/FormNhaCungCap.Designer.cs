@@ -74,7 +74,7 @@
             this.dgvNhaCungCap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvNhaCungCap.EnableHeadersVisualStyles = false;
             this.dgvNhaCungCap.Location = new System.Drawing.Point(0, 204);
-            this.dgvNhaCungCap.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvNhaCungCap.Margin = new System.Windows.Forms.Padding(2);
             this.dgvNhaCungCap.MultiSelect = false;
             this.dgvNhaCungCap.Name = "dgvNhaCungCap";
             this.dgvNhaCungCap.ReadOnly = true;
@@ -84,6 +84,7 @@
             this.dgvNhaCungCap.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvNhaCungCap.Size = new System.Drawing.Size(646, 262);
             this.dgvNhaCungCap.TabIndex = 3;
+            this.dgvNhaCungCap.SelectionChanged += new System.EventHandler(this.dgvNhaCungCap_SelectionChanged);
             // 
             // panelTop
             // 
@@ -93,9 +94,9 @@
             this.panelTop.Controls.Add(this.panelSearch);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
-            this.panelTop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelTop.Margin = new System.Windows.Forms.Padding(2);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Padding = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.panelTop.Padding = new System.Windows.Forms.Padding(8);
             this.panelTop.Size = new System.Drawing.Size(646, 204);
             this.panelTop.TabIndex = 4;
             // 
@@ -112,9 +113,9 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(8, 8);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(488, 143);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -124,7 +125,7 @@
             // 
             this.txtSDT.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtSDT.Location = new System.Drawing.Point(330, 65);
-            this.txtSDT.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSDT.Margin = new System.Windows.Forms.Padding(2);
             this.txtSDT.Name = "txtSDT";
             this.txtSDT.Size = new System.Drawing.Size(144, 23);
             this.txtSDT.TabIndex = 7;
@@ -133,7 +134,7 @@
             // 
             this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtEmail.Location = new System.Drawing.Point(330, 32);
-            this.txtEmail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(144, 23);
             this.txtEmail.TabIndex = 6;
@@ -142,17 +143,19 @@
             // 
             this.txtTenNCC.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtTenNCC.Location = new System.Drawing.Point(98, 65);
-            this.txtTenNCC.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTenNCC.Margin = new System.Windows.Forms.Padding(2);
             this.txtTenNCC.Name = "txtTenNCC";
             this.txtTenNCC.Size = new System.Drawing.Size(144, 23);
             this.txtTenNCC.TabIndex = 5;
             // 
             // txtMaNCC
             // 
+            this.txtMaNCC.BackColor = System.Drawing.SystemColors.ControlLight;
             this.txtMaNCC.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtMaNCC.Location = new System.Drawing.Point(98, 32);
-            this.txtMaNCC.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtMaNCC.Margin = new System.Windows.Forms.Padding(2);
             this.txtMaNCC.Name = "txtMaNCC";
+            this.txtMaNCC.ReadOnly = true;
             this.txtMaNCC.Size = new System.Drawing.Size(144, 23);
             this.txtMaNCC.TabIndex = 4;
             // 
@@ -208,7 +211,7 @@
             this.panelActions.Controls.Add(this.btnThem);
             this.panelActions.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelActions.Location = new System.Drawing.Point(496, 8);
-            this.panelActions.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelActions.Margin = new System.Windows.Forms.Padding(2);
             this.panelActions.Name = "panelActions";
             this.panelActions.Size = new System.Drawing.Size(142, 143);
             this.panelActions.TabIndex = 1;
@@ -220,7 +223,7 @@
             this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReset.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnReset.Location = new System.Drawing.Point(17, 111);
-            this.btnReset.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReset.Margin = new System.Windows.Forms.Padding(2);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(112, 28);
             this.btnReset.TabIndex = 3;
@@ -236,7 +239,7 @@
             this.btnXoa.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnXoa.ForeColor = System.Drawing.Color.White;
             this.btnXoa.Location = new System.Drawing.Point(17, 75);
-            this.btnXoa.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnXoa.Margin = new System.Windows.Forms.Padding(2);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(112, 28);
             this.btnXoa.TabIndex = 2;
@@ -252,7 +255,7 @@
             this.btnSua.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnSua.ForeColor = System.Drawing.Color.White;
             this.btnSua.Location = new System.Drawing.Point(17, 38);
-            this.btnSua.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSua.Margin = new System.Windows.Forms.Padding(2);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(112, 28);
             this.btnSua.TabIndex = 1;
@@ -268,7 +271,7 @@
             this.btnThem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnThem.ForeColor = System.Drawing.Color.White;
             this.btnThem.Location = new System.Drawing.Point(17, 2);
-            this.btnThem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnThem.Margin = new System.Windows.Forms.Padding(2);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(112, 28);
             this.btnThem.TabIndex = 0;
@@ -283,7 +286,7 @@
             this.panelSearch.Controls.Add(this.txtTimKiem);
             this.panelSearch.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelSearch.Location = new System.Drawing.Point(8, 151);
-            this.panelSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelSearch.Margin = new System.Windows.Forms.Padding(2);
             this.panelSearch.Name = "panelSearch";
             this.panelSearch.Size = new System.Drawing.Size(630, 45);
             this.panelSearch.TabIndex = 2;
@@ -296,7 +299,7 @@
             this.btnTimKiem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnTimKiem.ForeColor = System.Drawing.Color.White;
             this.btnTimKiem.Location = new System.Drawing.Point(330, 10);
-            this.btnTimKiem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnTimKiem.Margin = new System.Windows.Forms.Padding(2);
             this.btnTimKiem.Name = "btnTimKiem";
             this.btnTimKiem.Size = new System.Drawing.Size(90, 24);
             this.btnTimKiem.TabIndex = 1;
@@ -308,7 +311,7 @@
             // 
             this.txtTimKiem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtTimKiem.Location = new System.Drawing.Point(15, 11);
-            this.txtTimKiem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTimKiem.Margin = new System.Windows.Forms.Padding(2);
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(301, 23);
             this.txtTimKiem.TabIndex = 0;
@@ -320,7 +323,7 @@
             this.ClientSize = new System.Drawing.Size(646, 466);
             this.Controls.Add(this.dgvNhaCungCap);
             this.Controls.Add(this.panelTop);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormNhaCungCap";
             this.Text = "QUẢN LÝ NHÀ CUNG CẤP";
             this.Load += new System.EventHandler(this.FormNhaCungCap_Load);

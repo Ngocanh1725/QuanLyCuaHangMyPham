@@ -17,8 +17,9 @@ namespace QuanLyCuaHangMyPham.DAL
 
         public DataTable GetListSanPhamTrongKho()
         {
+            // Cập nhật: Thêm sp.HinhAnh vào câu truy vấn
             string query = @"
-                SELECT kh.MaSP, sp.TenSP, kh.SoLuong, kh.NgayNhap 
+                SELECT kh.MaSP, sp.TenSP, kh.SoLuong, kh.NgayNhap, sp.DonGia, sp.HinhAnh 
                 FROM KhoHang AS kh
                 JOIN SanPham AS sp ON kh.MaSP = sp.MaSP";
             return DataProvider.Instance.ExecuteQuery(query);

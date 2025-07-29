@@ -3,6 +3,7 @@ using QuanLyCuaHangMyPham.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace QuanLyCuaHangMyPham.BLL
 {
@@ -30,6 +31,12 @@ namespace QuanLyCuaHangMyPham.BLL
                 list.Add(new TopSanPhamDTO(item));
             }
             return list;
+        }
+
+        // Tối ưu: Thêm phương thức lấy doanh thu theo tháng
+        public DataTable GetDoanhThuTheoThang(int year)
+        {
+            return ThongKeDAL.Instance.GetDoanhThuTheoThang(year);
         }
     }
 }

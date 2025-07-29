@@ -16,6 +16,7 @@ namespace QuanLyCuaHangMyPham
             SetupDataGridView();
             LoadNhanVienList();
             AddNhanVienBinding();
+            LoadPhanQuyenComboBox();
         }
 
         void SetupDataGridView()
@@ -30,11 +31,11 @@ namespace QuanLyCuaHangMyPham
             dgvNhanVien.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Email", HeaderText = "Email" });
             dgvNhanVien.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "TenTK", HeaderText = "Tên Tài Khoản" });
             dgvNhanVien.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "MatKhau", HeaderText = "Mật Khẩu" });
+            dgvNhanVien.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "PhanQuyen", HeaderText = "Phân Quyền" });
         }
 
         void LoadNhanVienList()
         {
-            // Clear existing bindings
             txtMaNV.DataBindings.Clear();
             txtTenNV.DataBindings.Clear();
             txtSDT.DataBindings.Clear();
@@ -42,11 +43,9 @@ namespace QuanLyCuaHangMyPham
             txtEmail.DataBindings.Clear();
             txtTenTK.DataBindings.Clear();
             txtMatKhau.DataBindings.Clear();
+            cbbPhanQuyen.DataBindings.Clear();
 
-            // Load data into the DataGridView
             dgvNhanVien.DataSource = NhanVienBLL.Instance.GetListNhanVien();
-
-            // Do not call AddNhanVienBinding here
         }
 
         void AddNhanVienBinding()
@@ -58,6 +57,14 @@ namespace QuanLyCuaHangMyPham
             txtEmail.DataBindings.Add(new Binding("Text", dgvNhanVien.DataSource, "Email", true, DataSourceUpdateMode.Never));
             txtTenTK.DataBindings.Add(new Binding("Text", dgvNhanVien.DataSource, "TenTK", true, DataSourceUpdateMode.Never));
             txtMatKhau.DataBindings.Add(new Binding("Text", dgvNhanVien.DataSource, "MatKhau", true, DataSourceUpdateMode.Never));
+            cbbPhanQuyen.DataBindings.Add(new Binding("SelectedItem", dgvNhanVien.DataSource, "PhanQuyen", true, DataSourceUpdateMode.Never));
+        }
+
+        void LoadPhanQuyenComboBox()
+        {
+            cbbPhanQuyen.Items.Add("Admin");
+            cbbPhanQuyen.Items.Add("Nhân viên");
+            cbbPhanQuyen.SelectedIndex = 1; // Mặc định là "Nhân viên"
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -70,7 +77,9 @@ namespace QuanLyCuaHangMyPham
                     return;
                 }
 
-                if (NhanVienBLL.Instance.InsertNhanVien(txtMaNV.Text, txtTenNV.Text, txtSDT.Text, txtQueQuan.Text, txtEmail.Text, txtTenTK.Text, txtMatKhau.Text))
+                string phanQuyen = cbbPhanQuyen.SelectedItem.ToString();
+
+                if (NhanVienBLL.Instance.InsertNhanVien(txtMaNV.Text, txtTenNV.Text, txtSDT.Text, txtQueQuan.Text, txtEmail.Text, txtTenTK.Text, txtMatKhau.Text, phanQuyen))
                 {
                     MessageBox.Show("Thêm nhân viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadNhanVienList();
@@ -90,7 +99,9 @@ namespace QuanLyCuaHangMyPham
         {
             try
             {
-                if (NhanVienBLL.Instance.UpdateNhanVien(txtMaNV.Text, txtTenNV.Text, txtSDT.Text, txtQueQuan.Text, txtEmail.Text, txtTenTK.Text, txtMatKhau.Text))
+                string phanQuyen = cbbPhanQuyen.SelectedItem.ToString();
+
+                if (NhanVienBLL.Instance.UpdateNhanVien(txtMaNV.Text, txtTenNV.Text, txtSDT.Text, txtQueQuan.Text, txtEmail.Text, txtTenTK.Text, txtMatKhau.Text, phanQuyen))
                 {
                     MessageBox.Show("Cập nhật thông tin nhân viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadNhanVienList();
@@ -144,6 +155,7 @@ namespace QuanLyCuaHangMyPham
             txtTenTK.Clear();
             txtMatKhau.Clear();
             txtTimKiem.Clear();
+            cbbPhanQuyen.SelectedIndex = 1;
             LoadNhanVienList();
         }
     }

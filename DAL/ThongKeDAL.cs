@@ -15,8 +15,6 @@ namespace QuanLyCuaHangMyPham.DAL
 
         public DataTable GetThongKeDonHang(DateTime fromDate, DateTime toDate)
         {
-
-            // Sửa lỗi: Cập nhật câu truy vấn để lấy đủ các trường cho DonHangDTO
             string query = @"
                 SELECT 
                     dh.MaDH, 
@@ -39,7 +37,6 @@ namespace QuanLyCuaHangMyPham.DAL
 
         public DataTable GetTopSanPham(DateTime fromDate, DateTime toDate)
         {
-            // Lấy 5 sản phẩm bán chạy nhất
             string query = @"
                 SELECT TOP 5
                     sp.TenSP, 
@@ -52,6 +49,21 @@ namespace QuanLyCuaHangMyPham.DAL
                 ORDER BY SoLuongBan DESC";
 
             return DataProvider.Instance.ExecuteQuery(query, new object[] { fromDate, toDate });
+        }
+
+        // Tối ưu: Thêm phương thức lấy doanh thu theo tháng
+        public DataTable GetDoanhThuTheoThang(int year)
+        {
+            string query = @"
+                SELECT 
+                    MONTH(dh.NgayMua) AS Thang, 
+                    SUM(ct.SoLuong * ct.GiaBan) AS DoanhThu
+                FROM DonHang AS dh
+                JOIN ChiTietDonHang AS ct ON dh.MaDH = ct.MaDH
+                WHERE YEAR(dh.NgayMua) = @year
+                GROUP BY MONTH(dh.NgayMua)
+                ORDER BY Thang ASC";
+            return DataProvider.Instance.ExecuteQuery(query, new object[] { year });
         }
     }
 }

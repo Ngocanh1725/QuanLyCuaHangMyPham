@@ -1,10 +1,10 @@
-﻿// Đảm bảo các using directive này được khai báo ở đầu file
-using QuanLyCuaHangMyPham.DAL; // Cần thiết để sử dụng KhoHangDAL, DataProvider, ...
-using QuanLyCuaHangMyPham.DTO; // Cần thiết để sử dụng các lớp DTO
+﻿using QuanLyCuaHangMyPham.DAL;
+using QuanLyCuaHangMyPham.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient; // Cần thiết cho SqlTransaction
+using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace QuanLyCuaHangMyPham.BLL
 {
@@ -18,10 +18,29 @@ namespace QuanLyCuaHangMyPham.BLL
         }
         private DonHangBLL() { }
 
+        public string GenerateNextMaDH()
+        {
+            string lastMaDH = DonHangDAL.Instance.GetLastMaDH();
+            if (string.IsNullOrEmpty(lastMaDH))
+            {
+                return "DH001"; // Bắt đầu nếu chưa có mã nào
+            }
+
+            Match match = Regex.Match(lastMaDH, @"(\d+)$");
+            if (match.Success)
+            {
+                int number = int.Parse(match.Value);
+                number++;
+                return "DH" + number.ToString("D3");
+            }
+
+            // Trả về mã mặc định nếu có lỗi
+            return "DH001";
+        }
+
         public List<SanPhamKhoDTO> GetListSanPhamTrongKho()
         {
             List<SanPhamKhoDTO> list = new List<SanPhamKhoDTO>();
-            // Lời gọi này yêu cầu using QuanLyCuaHangMyPham.DAL;
             DataTable data = KhoHangDAL.Instance.GetListSanPhamTrongKho();
             foreach (DataRow item in data.Rows)
             {
@@ -36,8 +55,7 @@ namespace QuanLyCuaHangMyPham.BLL
         public List<NhanVienDTO> GetListNhanVien()
         {
             List<NhanVienDTO> list = new List<NhanVienDTO>();
-            // Lời gọi này yêu cầu NhanVienBLL phải tồn tại và public
-            DataTable dataTable = NhanVienBLL.Instance.GetListNhanVien();
+            DataTable dataTable = NhanVienDAL.Instance.GetListNhanVien();
             foreach (DataRow row in dataTable.Rows)
             {
                 list.Add(new NhanVienDTO(row));
@@ -47,7 +65,6 @@ namespace QuanLyCuaHangMyPham.BLL
 
         public bool CreateDonHang(DonHangDTO dh, List<ChiTietDonHangDTO> listChiTiet)
         {
-            // Lời gọi này yêu cầu using QuanLyCuaHangMyPham.DAL;
             using (SqlConnection conn = new SqlConnection(DataProvider.Instance.ConnectionString))
             {
                 conn.Open();
@@ -110,6 +127,11 @@ namespace QuanLyCuaHangMyPham.BLL
                     return false;
                 }
             }
+        }
+
+        public bool DeleteDonHang(string maDH)
+        {
+            return DonHangDAL.Instance.DeleteDonHang(maDH);
         }
     }
 }

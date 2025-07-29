@@ -1,5 +1,9 @@
 ﻿using QuanLyCuaHangMyPham.BLL;
 using System;
+using System.Data;
+using System.Drawing;
+using System.Drawing.Imaging; // Thêm using cho ImageFormat
+using System.IO;
 using System.Windows.Forms;
 
 namespace QuanLyCuaHangMyPham
@@ -16,6 +20,16 @@ namespace QuanLyCuaHangMyPham
             SetupDataGridView();
             LoadKhoHangList();
         }
+
+        private Image ByteArrayToImage(byte[] byteArray)
+        {
+            if (byteArray == null || byteArray.Length == 0) return null;
+            using (MemoryStream ms = new MemoryStream(byteArray))
+            {
+                return Image.FromStream(ms);
+            }
+        }
+
         void SetupDataGridView()
         {
             dgvKhoHang.AutoGenerateColumns = false;
@@ -24,6 +38,8 @@ namespace QuanLyCuaHangMyPham
             dgvKhoHang.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "TenSP", HeaderText = "Tên Sản Phẩm" });
             dgvKhoHang.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "SoLuong", HeaderText = "Số Lượng Tồn" });
             dgvKhoHang.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "NgayNhap", HeaderText = "Ngày Nhập Cuối" });
+            // Ẩn cột hình ảnh
+            dgvKhoHang.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "HinhAnh", Visible = false });
         }
 
         void LoadKhoHangList()
@@ -34,7 +50,6 @@ namespace QuanLyCuaHangMyPham
         private void btnNhapHang_Click(object sender, EventArgs e)
         {
             FormNhapHang f = new FormNhapHang();
-            // Chỉ load lại grid nếu form Nhập hàng trả về kết quả OK
             if (f.ShowDialog() == DialogResult.OK)
             {
                 LoadKhoHangList();
@@ -70,6 +85,26 @@ namespace QuanLyCuaHangMyPham
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
             LoadKhoHangList();
+        }
+
+        private void dgvKhoHang_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvKhoHang.SelectedRows.Count > 0)
+            {
+                DataRowView drv = dgvKhoHang.SelectedRows[0].DataBoundItem as DataRowView;
+                if (drv != null)
+                {
+                    if (drv.Row["HinhAnh"] != DBNull.Value)
+                    {
+                        byte[] hinhAnhData = (byte[])drv.Row["HinhAnh"];
+                        picHinhAnhSP.Image = ByteArrayToImage(hinhAnhData);
+                    }
+                    else
+                    {
+                        picHinhAnhSP.Image = null;
+                    }
+                }
+            }
         }
     }
 }

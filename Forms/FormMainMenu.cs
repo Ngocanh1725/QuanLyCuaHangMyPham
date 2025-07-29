@@ -110,15 +110,17 @@ namespace QuanLyCuaHangMyPham
 
         private void btnDangXuat_Click(object sender, EventArgs e)
         {
-            this.Close();
+            // Thêm hộp thoại xác nhận trước khi đăng xuất
+            if (MessageBox.Show("Bạn có chắc chắn muốn đăng xuất không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.Close();
+            }
         }
 
-        // Sửa lỗi: Thêm phương thức xử lý sự kiện FormClosed còn thiếu
         private void FormMainMenu_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // Khi form này đóng (đăng xuất), FormLogin sẽ tự động hiển thị lại
+            // Khi form này đóng, FormLogin sẽ tự động hiển thị lại
             // do cách gọi f.ShowDialog() trong FormLogin.
-            // Không cần thêm code vào đây.
         }
     }
 }

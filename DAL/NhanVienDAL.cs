@@ -20,7 +20,7 @@ namespace QuanLyCuaHangMyPham.DAL
         public DataTable GetListNhanVien()
         {
             string query = @"
-                SELECT nv.MaNV, nv.TenNV, nv.SDT, nv.QueQuan, nv.Email, nv.TenTK, tk.MatKhau
+                SELECT nv.MaNV, nv.TenNV, nv.SDT, nv.QueQuan, nv.Email, nv.TenTK, tk.MatKhau, tk.PhanQuyen
                 FROM NhanVien AS nv
                 LEFT JOIN TaiKhoan AS tk ON nv.TenTK = tk.TenTK";
             return DataProvider.Instance.ExecuteQuery(query);
@@ -75,7 +75,7 @@ namespace QuanLyCuaHangMyPham.DAL
             }
         }
 
-        public bool UpdateNhanVienAndAccount(NhanVienDTO nv, string newMatKhau)
+        public bool UpdateNhanVienAndAccount(NhanVienDTO nv, string newMatKhau, string phanQuyen)
         {
             using (SqlConnection conn = new SqlConnection(DataProvider.Instance.ConnectionString))
             {
@@ -93,10 +93,11 @@ namespace QuanLyCuaHangMyPham.DAL
                     nvCommand.Parameters.AddWithValue("@MaNV", nv.MaNV);
                     nvCommand.ExecuteNonQuery();
 
-                    // Cập nhật tài khoản
-                    string tkQuery = "UPDATE TaiKhoan SET MatKhau = @MatKhau WHERE TenTK = @TenTK";
+                    // Cập nhật tài khoản (cả mật khẩu và phân quyền)
+                    string tkQuery = "UPDATE TaiKhoan SET MatKhau = @MatKhau, PhanQuyen = @PhanQuyen WHERE TenTK = @TenTK";
                     SqlCommand tkCommand = new SqlCommand(tkQuery, conn, transaction);
                     tkCommand.Parameters.AddWithValue("@MatKhau", newMatKhau);
+                    tkCommand.Parameters.AddWithValue("@PhanQuyen", phanQuyen);
                     tkCommand.Parameters.AddWithValue("@TenTK", nv.TenTK);
                     tkCommand.ExecuteNonQuery();
 
@@ -148,7 +149,7 @@ namespace QuanLyCuaHangMyPham.DAL
         public DataTable SearchNhanVien(string keyword)
         {
             string query = @"
-                SELECT nv.MaNV, nv.TenNV, nv.SDT, nv.QueQuan, nv.Email, nv.TenTK, tk.MatKhau
+                SELECT nv.MaNV, nv.TenNV, nv.SDT, nv.QueQuan, nv.Email, nv.TenTK, tk.MatKhau, tk.PhanQuyen
                 FROM NhanVien AS nv
                 JOIN TaiKhoan AS tk ON nv.TenTK = tk.TenTK
                 WHERE nv.TenNV LIKE @keyword OR nv.MaNV LIKE @keyword OR nv.Email LIKE @keyword OR nv.SDT LIKE @keyword";

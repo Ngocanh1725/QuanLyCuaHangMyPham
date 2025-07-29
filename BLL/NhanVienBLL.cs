@@ -22,22 +22,21 @@ namespace QuanLyCuaHangMyPham.BLL
             return NhanVienDAL.Instance.GetListNhanVien();
         }
 
-        public bool InsertNhanVien(string maNV, string tenNV, string sdt, string queQuan, string email, string tenTK, string matKhau)
+        public bool InsertNhanVien(string maNV, string tenNV, string sdt, string queQuan, string email, string tenTK, string matKhau, string phanQuyen)
         {
-            // Kiểm tra xem tài khoản hoặc mã nhân viên đã tồn tại chưa
             if (TaiKhoanDAL.Instance.GetAccountByUserName(tenTK) != null) return false;
             if (NhanVienDAL.Instance.GetNhanVienByMaNV(maNV) != null) return false;
 
-            TaiKhoanDTO tk = new TaiKhoanDTO(tenTK, matKhau, "Nhân viên");
+            TaiKhoanDTO tk = new TaiKhoanDTO(tenTK, matKhau, phanQuyen);
             NhanVienDTO nv = new NhanVienDTO(maNV, tenNV, sdt, queQuan, email, tenTK);
 
             return NhanVienDAL.Instance.InsertNhanVienWithAccount(nv, tk);
         }
 
-        public bool UpdateNhanVien(string maNV, string tenNV, string sdt, string queQuan, string email, string tenTK, string matKhau)
+        public bool UpdateNhanVien(string maNV, string tenNV, string sdt, string queQuan, string email, string tenTK, string matKhau, string phanQuyen)
         {
             NhanVienDTO nv = new NhanVienDTO(maNV, tenNV, sdt, queQuan, email, tenTK);
-            return NhanVienDAL.Instance.UpdateNhanVienAndAccount(nv, matKhau);
+            return NhanVienDAL.Instance.UpdateNhanVienAndAccount(nv, matKhau, phanQuyen);
         }
 
         public bool DeleteNhanVien(string maNV)

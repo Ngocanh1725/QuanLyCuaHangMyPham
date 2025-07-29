@@ -33,6 +33,7 @@
             this.panelRight = new System.Windows.Forms.Panel();
             this.dgvGioHang = new System.Windows.Forms.DataGridView();
             this.gbThemSanPham = new System.Windows.Forms.GroupBox();
+            this.picHinhAnhSP = new System.Windows.Forms.PictureBox();
             this.btnXoaSP = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
             this.btnThemSP = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
             this.txtGiaBan = new System.Windows.Forms.TextBox();
@@ -52,6 +53,7 @@
             this.panelRight.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGioHang)).BeginInit();
             this.gbThemSanPham.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picHinhAnhSP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSoLuong)).BeginInit();
             this.panelBottom.SuspendLayout();
             this.SuspendLayout();
@@ -131,10 +133,12 @@
             // 
             // txtMaDH
             // 
+            this.txtMaDH.BackColor = System.Drawing.SystemColors.ControlLight;
             this.txtMaDH.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtMaDH.Location = new System.Drawing.Point(15, 41);
             this.txtMaDH.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtMaDH.Name = "txtMaDH";
+            this.txtMaDH.ReadOnly = true;
             this.txtMaDH.Size = new System.Drawing.Size(218, 23);
             this.txtMaDH.TabIndex = 5;
             // 
@@ -249,6 +253,7 @@
             // 
             // gbThemSanPham
             // 
+            this.gbThemSanPham.Controls.Add(this.picHinhAnhSP);
             this.gbThemSanPham.Controls.Add(this.btnXoaSP);
             this.gbThemSanPham.Controls.Add(this.btnThemSP);
             this.gbThemSanPham.Controls.Add(this.txtGiaBan);
@@ -268,6 +273,17 @@
             this.gbThemSanPham.TabStop = false;
             this.gbThemSanPham.Text = "Giỏ hàng";
             // 
+            // picHinhAnhSP
+            // 
+            this.picHinhAnhSP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picHinhAnhSP.Location = new System.Drawing.Point(279, 28);
+            this.picHinhAnhSP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picHinhAnhSP.Name = "picHinhAnhSP";
+            this.picHinhAnhSP.Size = new System.Drawing.Size(90, 87);
+            this.picHinhAnhSP.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picHinhAnhSP.TabIndex = 8;
+            this.picHinhAnhSP.TabStop = false;
+            // 
             // btnXoaSP
             // 
             this.btnXoaSP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(82)))), ((int)(((byte)(82)))));
@@ -276,7 +292,7 @@
             this.btnXoaSP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnXoaSP.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnXoaSP.ForeColor = System.Drawing.Color.White;
-            this.btnXoaSP.Location = new System.Drawing.Point(279, 89);
+            this.btnXoaSP.Location = new System.Drawing.Point(172, 89);
             this.btnXoaSP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnXoaSP.Name = "btnXoaSP";
             this.btnXoaSP.Size = new System.Drawing.Size(90, 28);
@@ -293,7 +309,7 @@
             this.btnThemSP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnThemSP.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnThemSP.ForeColor = System.Drawing.Color.White;
-            this.btnThemSP.Location = new System.Drawing.Point(279, 41);
+            this.btnThemSP.Location = new System.Drawing.Point(78, 89);
             this.btnThemSP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnThemSP.Name = "btnThemSP";
             this.btnThemSP.Size = new System.Drawing.Size(90, 28);
@@ -305,17 +321,18 @@
             // txtGiaBan
             // 
             this.txtGiaBan.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtGiaBan.Location = new System.Drawing.Point(82, 93);
+            this.txtGiaBan.Location = new System.Drawing.Point(78, 61);
             this.txtGiaBan.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtGiaBan.Name = "txtGiaBan";
-            this.txtGiaBan.Size = new System.Drawing.Size(181, 23);
+            this.txtGiaBan.ReadOnly = true;
+            this.txtGiaBan.Size = new System.Drawing.Size(91, 23);
             this.txtGiaBan.TabIndex = 5;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.label8.Location = new System.Drawing.Point(15, 96);
+            this.label8.Location = new System.Drawing.Point(15, 63);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(50, 15);
@@ -325,7 +342,7 @@
             // numSoLuong
             // 
             this.numSoLuong.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.numSoLuong.Location = new System.Drawing.Point(82, 61);
+            this.numSoLuong.Location = new System.Drawing.Point(207, 61);
             this.numSoLuong.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.numSoLuong.Minimum = new decimal(new int[] {
             1,
@@ -333,7 +350,7 @@
             0,
             0});
             this.numSoLuong.Name = "numSoLuong";
-            this.numSoLuong.Size = new System.Drawing.Size(180, 23);
+            this.numSoLuong.Size = new System.Drawing.Size(55, 23);
             this.numSoLuong.TabIndex = 3;
             this.numSoLuong.Value = new decimal(new int[] {
             1,
@@ -345,12 +362,12 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.label7.Location = new System.Drawing.Point(15, 63);
+            this.label7.Location = new System.Drawing.Point(181, 64);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(57, 15);
+            this.label7.Size = new System.Drawing.Size(25, 15);
             this.label7.TabIndex = 2;
-            this.label7.Text = "Số lượng:";
+            this.label7.Text = "SL :";
             // 
             // cbbSanPham
             // 
@@ -358,10 +375,10 @@
             this.cbbSanPham.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbbSanPham.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbbSanPham.FormattingEnabled = true;
-            this.cbbSanPham.Location = new System.Drawing.Point(82, 28);
+            this.cbbSanPham.Location = new System.Drawing.Point(78, 28);
             this.cbbSanPham.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbbSanPham.Name = "cbbSanPham";
-            this.cbbSanPham.Size = new System.Drawing.Size(181, 23);
+            this.cbbSanPham.Size = new System.Drawing.Size(186, 23);
             this.cbbSanPham.TabIndex = 1;
             // 
             // label6
@@ -404,7 +421,7 @@
             this.btnXemChiTiet.Name = "btnXemChiTiet";
             this.btnXemChiTiet.Size = new System.Drawing.Size(112, 32);
             this.btnXemChiTiet.TabIndex = 4;
-            this.btnXemChiTiet.Text = "Chi Tiết ĐH";
+            this.btnXemChiTiet.Text = "Chi tiết ĐH";
             this.btnXemChiTiet.UseVisualStyleBackColor = false;
             this.btnXemChiTiet.Click += new System.EventHandler(this.btnXemChiTiet_Click);
             // 
@@ -486,6 +503,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvGioHang)).EndInit();
             this.gbThemSanPham.ResumeLayout(false);
             this.gbThemSanPham.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picHinhAnhSP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSoLuong)).EndInit();
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
@@ -523,5 +541,6 @@
         private System.Windows.Forms.Label lblTongTien;
         private System.Windows.Forms.Label label9;
         private CustomControls.RoundedButton btnXemChiTiet;
+        private System.Windows.Forms.PictureBox picHinhAnhSP;
     }
 }

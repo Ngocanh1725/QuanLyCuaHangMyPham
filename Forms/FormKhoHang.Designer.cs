@@ -21,8 +21,16 @@
             this.btnXoa = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
             this.btnNhapHang = new QuanLyCuaHangMyPham.CustomControls.RoundedButton();
             this.dgvKhoHang = new System.Windows.Forms.DataGridView();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.picHinhAnhSP = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKhoHang)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picHinhAnhSP)).BeginInit();
             this.SuspendLayout();
             // 
             // panelTop
@@ -111,7 +119,7 @@
             this.dgvKhoHang.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvKhoHang.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvKhoHang.EnableHeadersVisualStyles = false;
-            this.dgvKhoHang.Location = new System.Drawing.Point(0, 70);
+            this.dgvKhoHang.Location = new System.Drawing.Point(0, 0);
             this.dgvKhoHang.MultiSelect = false;
             this.dgvKhoHang.Name = "dgvKhoHang";
             this.dgvKhoHang.ReadOnly = true;
@@ -119,22 +127,73 @@
             this.dgvKhoHang.RowHeadersWidth = 51;
             this.dgvKhoHang.RowTemplate.Height = 30;
             this.dgvKhoHang.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvKhoHang.Size = new System.Drawing.Size(862, 503);
+            this.dgvKhoHang.Size = new System.Drawing.Size(570, 503);
             this.dgvKhoHang.TabIndex = 1;
+            this.dgvKhoHang.SelectionChanged += new System.EventHandler(this.dgvKhoHang_SelectionChanged);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 70);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.dgvKhoHang);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.BackColor = System.Drawing.Color.White;
+            this.splitContainer1.Panel2.Controls.Add(this.label1);
+            this.splitContainer1.Panel2.Controls.Add(this.picHinhAnhSP);
+            this.splitContainer1.Size = new System.Drawing.Size(862, 503);
+            this.splitContainer1.SplitterDistance = 570;
+            this.splitContainer1.TabIndex = 2;
+            // 
+            // picHinhAnhSP
+            // 
+            this.picHinhAnhSP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.picHinhAnhSP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picHinhAnhSP.Location = new System.Drawing.Point(18, 59);
+            this.picHinhAnhSP.Name = "picHinhAnhSP";
+            this.picHinhAnhSP.Size = new System.Drawing.Size(258, 258);
+            this.picHinhAnhSP.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picHinhAnhSP.TabIndex = 0;
+            this.picHinhAnhSP.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(18, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(258, 23);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Hình ảnh sản phẩm";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FormKhoHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(862, 573);
-            this.Controls.Add(this.dgvKhoHang);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panelTop);
             this.Name = "FormKhoHang";
             this.Text = "QUẢN LÝ KHO HÀNG";
             this.Load += new System.EventHandler(this.FormKhoHang_Load);
             this.panelTop.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvKhoHang)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picHinhAnhSP)).EndInit();
             this.ResumeLayout(false);
+
         }
         #endregion
 
@@ -143,5 +202,8 @@
         private CustomControls.RoundedButton btnXoa;
         private CustomControls.RoundedButton btnNhapHang;
         private System.Windows.Forms.DataGridView dgvKhoHang;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.PictureBox picHinhAnhSP;
+        private System.Windows.Forms.Label label1;
     }
 }

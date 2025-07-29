@@ -21,6 +21,8 @@
             this.dgvNhanVien = new System.Windows.Forms.DataGridView();
             this.panelTop = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbbPhanQuyen = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.txtMatKhau = new System.Windows.Forms.TextBox();
             this.txtTenTK = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -105,6 +107,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbbPhanQuyen);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.txtMatKhau);
             this.groupBox1.Controls.Add(this.txtTenTK);
             this.groupBox1.Controls.Add(this.label7);
@@ -128,10 +132,30 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin nhân viên";
             // 
+            // cbbPhanQuyen
+            // 
+            this.cbbPhanQuyen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbbPhanQuyen.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.cbbPhanQuyen.FormattingEnabled = true;
+            this.cbbPhanQuyen.Location = new System.Drawing.Point(440, 140);
+            this.cbbPhanQuyen.Name = "cbbPhanQuyen";
+            this.cbbPhanQuyen.Size = new System.Drawing.Size(190, 28);
+            this.cbbPhanQuyen.TabIndex = 15;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.label8.Location = new System.Drawing.Point(340, 143);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(88, 20);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "Phân quyền:";
+            // 
             // txtMatKhau
             // 
             this.txtMatKhau.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtMatKhau.Location = new System.Drawing.Point(440, 140);
+            this.txtMatKhau.Location = new System.Drawing.Point(440, 107);
             this.txtMatKhau.Name = "txtMatKhau";
             this.txtMatKhau.Size = new System.Drawing.Size(190, 27);
             this.txtMatKhau.TabIndex = 13;
@@ -139,7 +163,7 @@
             // txtTenTK
             // 
             this.txtTenTK.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtTenTK.Location = new System.Drawing.Point(440, 90);
+            this.txtTenTK.Location = new System.Drawing.Point(440, 74);
             this.txtTenTK.Name = "txtTenTK";
             this.txtTenTK.Size = new System.Drawing.Size(190, 27);
             this.txtTenTK.TabIndex = 12;
@@ -148,7 +172,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.label7.Location = new System.Drawing.Point(340, 143);
+            this.label7.Location = new System.Drawing.Point(340, 110);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(73, 20);
             this.label7.TabIndex = 11;
@@ -158,7 +182,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.label6.Location = new System.Drawing.Point(340, 93);
+            this.label6.Location = new System.Drawing.Point(340, 77);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(98, 20);
             this.label6.TabIndex = 10;
@@ -406,5 +430,7 @@
         private CustomControls.RoundedButton btnThem;
         private System.Windows.Forms.Panel panelSearch;
         private System.Windows.Forms.TextBox txtTimKiem;
+        private System.Windows.Forms.ComboBox cbbPhanQuyen;
+        private System.Windows.Forms.Label label8;
     }
 }
